@@ -1,5 +1,7 @@
 function init() {
   const maze = document.querySelector('.maze')
+  const startButton = document.querySelector('button')
+  console.log(startButton)
 
   const width = 20
   const cellCount = width * width
@@ -10,19 +12,25 @@ function init() {
   const matrushkaClass = 'matrushka'
 
   const enemyStartingPosition = 0
-  let currentEnemyPosition = Math.floor(Math.random) * cells.length
+  let currentEnemyPosition = 0
+  // console.log(currentEnemyPosition)
   const enemyClass = 'enemy'
 
   function createGrid() {
-    for (let i = 0; i < cellCount; i++) {               
-      const cell = document.createElement('div')         
-      cell.innerText = i                                // Keeping numbers for easier positioning of obstacles later
-      maze.appendChild(cell)                            
+    for (let i = 0; i < cellCount; i++) {               // It is going to repeat 200 times (because of 20 * 20)
+      const cell = document.createElement('div')        // Creating a div. 
+      cell.innerText = i                                // Making sure we see a number inside of a div
+      // console.log('cell >', cell)
+      maze.appendChild(cell)                            // Appending a cell as a child to the main div with the class of 'grid'
       cells.push(cell)                           
     }
+    console.log('cells >', cells)
+    currentEnemyPosition = Math.floor(Math.random() * cells.length)
+    console.log('Current number >', currentEnemyPosition)
+    addEnemy(currentEnemyPosition)
 
     // addMatrushka(matrushkaStartingPosition)
-    addEnemy(enemyStartingPosition)
+    // enemyMovement()
   }
 
   // ! ENEMY
@@ -31,13 +39,47 @@ function init() {
     cells[position].classList.add(enemyClass)
   }
 
+  // addEnemy(currentEnemyPosition)
+
   function removeEnemy(position) {
     cells[position].classList.remove(enemyClass)
   }
 
   function enemyMovement() {
-    addEnemy(enemyStartingPosition)
+    const direction = [-1, 1, width, -width]      // right, left, up, down
+    // getting random option from direction array
+    let random = Math.floor(Math.random() * direction.length)
+    // console.log('Random >>', random)
+    // ! random direction movement
+    // updating currentEnemyPosition with a random I've got
+    currentEnemyPosition += random 
+    // if (currentEnemyPosition % width !== width - 1) {
+    //   currentEnemyPosition++
+    //   console.log('right')
+    //   console.log('currentEnemyPosition >', currentEnemyPosition)
+    // } 
+    // if (currentEnemyPosition % width !== 0) {
+    //   currentEnemyPosition--
+    //   console.log('left')
+    //   console.log('currentEnemyPosition >', currentEnemyPosition)
+    // } 
+    if (currentEnemyPosition >= width - 1) {         
+      currentEnemyPosition -= width
+      console.log('up')
+      console.log('currentEnemyPosition >', currentEnemyPosition)
+    } 
+    // if (currentEnemyPosition + width <= width * width - 1) {
+    //   currentEnemyPosition += width
+    //   console.log('down')
+    //   console.log('currentEnemyPosition >', currentEnemyPosition)
+    // }
+    addEnemy(currentEnemyPosition)
   }
+  
+  const movement = setInterval(() => {
+    enemyMovement()
+  }, 1000)
+  clearTimeout(movement)
 
   // function handleKeyUp(event) {
   //   console.log('position before key', currentEnemyPosition)
@@ -60,8 +102,8 @@ function init() {
     //   console.log('INVALID KEY')
     // }
 
-    addEnemy(currentEnemyPosition)
-  }
+    // addEnemy(currentEnemyPosition)
+  // }
 
   // ! MATRUSHKA
 
@@ -99,11 +141,11 @@ function init() {
   // }
 
   // ! Event listener for keyboard keys.
-  document.addEventListener('keyup', handleKeyUp)
+  // document.addEventListener('keyup', handleKeyUp)
 
   // createGrid(matrushkaStartingPosition)
-  createGrid(enemyStartingPosition)
-  // createGrid()
+  // createGrid(enemyStartingPosition)
+  createGrid()
 
 }
 

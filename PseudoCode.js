@@ -35,9 +35,8 @@
 //   ++ An empty array called grid, where I am later going to add with push method divs. Like we did in a class. 
 //   ++ An array with classes of walls stored inside that I can later append to a div that I am going to create inside JavaScript and than append to HTML.
 //   ++ Creating my Бабушка and declaring her position with global variable
-//   ++ Moving Бабушка? 
-// ?   ~~ Left, right, up, down
-// ?   ~~ How to prevent you don’t hit a wall
+//   ++ Moving Бабушка? // ! DONE
+// ?   ~~ Left, right, up, down// ?   ~~ How to prevent you don’t hit a wall
 // ?   ~~ When moving from one position to another, removing the class and adding it to the new position
 //   ++ Food
 // ?   ~~ A class inside CSS and added with JavaScript to HTML
