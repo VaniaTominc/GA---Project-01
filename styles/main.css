@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: tomato;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center;
+}
+
+.game-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.maze {
+  background-color: white;
+  color: black
+  align-items: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: center;
+  height: 600px;
+  width: 600px;
+}
+
+.maze div {
+  border: 1px solid lightgrey;
+  flex-grow: 1;
+  height: 5%;
+  width: 5%;
+}
+
+.desno {
+  width: 200px;
+  text-align: center;
+}
+
+.maze div.matrushka {
+  background-color: purple;
+  cursor: pointer;
+}
+
+.maze div.enemy {
+  background-color: black; 
+}
