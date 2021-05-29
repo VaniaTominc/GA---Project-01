@@ -32,8 +32,10 @@ function init() {
 
   // console.log(aMazeing.length)
 
-  const score = document.querySelector('counter')
-  let babushkaPoints = 0
+  const babushkaScore = document.querySelector('.counter')
+  // console.log(score)
+  let countBabushkaPoints = 0
+  // console.log(typeof(countBabushkaPoints))
 
 
   const matrushkaStartingPosition = 389
@@ -124,7 +126,8 @@ function init() {
       addEnemy(currentEnemyPosition)
     }
 
-    // ! Find out why he is not obeying me and still travelling through walls 
+     // ! Find out why he is not obeying me and still travelling through walls 
+
 
   }
   
@@ -133,7 +136,7 @@ function init() {
   const movement = setInterval(() => {
     enemyMovement()
   }, 2000)
-  // clearTimeout(movement)
+  clearTimeout(movement)
 
 
 
@@ -159,8 +162,14 @@ function init() {
       // But if the future doesn't have na obstacle, than we continue with our journey. 
       if (cells[currentMatrushkaPosition + 1].classList.contains('obstacle')) {
         currentMatrushkaPosition += 0
-      } else if (currentMatrushkaPosition % width !== width - 1) {
+      } else if (currentMatrushkaPosition + 1) {          // ? <= same => (currentMatrushkaPosition % width !== width - 1)
         currentMatrushkaPosition++
+        // console.log('WAHEY!')
+        // countBabushkaPoints += 1
+        // console.log('typeof', typeof(countBabushkaPoints))
+        // babushkaScore.innerText = parseFloat(countBabushkaPoints)
+        // console.log(babushkaScore.innerText)
+        gettingSmallBabushkas()
       }
       removeLittleBabushka()
       removeBigBabushka()
@@ -170,8 +179,15 @@ function init() {
       console.log('LEFT')
       if (cells[currentMatrushkaPosition - 1].classList.contains('obstacle')) {
         currentMatrushkaPosition -= 0
-      } else if (currentMatrushkaPosition % width !== 0) {
+      } else if (currentMatrushkaPosition - 1) {         // ? <= same => (currentMatrushkaPosition % width !== 0)
         currentMatrushkaPosition--
+        // countBabushkaPoints += 1
+        // babushkaScore.innerText = parseFloat(countBabushkaPoints)
+        // if (cells[currentMatrushkaPosition].classList.contains('points')) {          // ! After checking it works in all cases, I decided just to create a function with the code inside and then called - to prevent the repetition of the code
+        //   countBabushkaPoints += 1
+        //   babushkaScore.innerText = parseFloat(countBabushkaPoints)
+        //}
+        gettingSmallBabushkas()
       }
       removeLittleBabushka()
       removeBigBabushka()
@@ -180,8 +196,9 @@ function init() {
       console.log('UP')
       if (cells[currentMatrushkaPosition - width].classList.contains('obstacle')) {
         currentMatrushkaPosition
-      } else if (currentMatrushkaPosition >= width) {
+      } else if (currentMatrushkaPosition - width) {    // ? <= same => (currentMatrushkaPosition >= width)
         currentMatrushkaPosition -= width
+        gettingSmallBabushkas()
       }
       removeLittleBabushka()
       removeBigBabushka()
@@ -191,8 +208,9 @@ function init() {
       if (cells[currentMatrushkaPosition + width].classList.contains('obstacle')) {
         currentMatrushkaPosition
       }
-      else if (currentMatrushkaPosition + width <= width * width - 1) {
+      else if (currentMatrushkaPosition + width) {      // ? <= same => (currentMatrushkaPosition + width <= width * width - 1)
         currentMatrushkaPosition += width
+        gettingSmallBabushkas()
       }
       console.log('DOWN')
       removeLittleBabushka()
@@ -277,7 +295,14 @@ function init() {
     }
   }
 
+  // ! Getting small points function to prevent the repetition of code
 
+  function gettingSmallBabushkas() {
+    if (cells[currentMatrushkaPosition].classList.contains('points')) {
+      countBabushkaPoints += 1
+      babushkaScore.innerText = parseFloat(countBabushkaPoints)
+    }
+  }
 
 
 
