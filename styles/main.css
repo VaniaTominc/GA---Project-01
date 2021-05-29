@@ -63,7 +63,7 @@ main {
 .maze div.points {
   /* background-image: url('../images/coin.gif');
   background-size: contain; */
-  /* background: yellow; */
+  /* background: rgba(255, 255, 0, 0.179);  */
 }
 
 .maze div.bigPoints {

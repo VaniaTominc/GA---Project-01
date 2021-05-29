@@ -1,7 +1,7 @@
 function init() {
   const maze = document.querySelector('.maze')
   const startButton = document.querySelector('button')
-  console.log(startButton)
+  // console.log(startButton)
 
   const width = 20
   const cellCount = width * width
@@ -32,6 +32,10 @@ function init() {
 
   // console.log(aMazeing.length)
 
+  const score = document.querySelector('counter')
+  let babushkaPoints = 0
+
+
   const matrushkaStartingPosition = 389
   let currentMatrushkaPosition = 389
   const matrushkaClass = 'matrushka'
@@ -57,7 +61,7 @@ function init() {
     // addMatrushka(currentMatrushkaPosition)
     addEnemy(currentEnemyPosition)
     
-    console.log('cells >', cells)
+    // console.log('cells >', cells)
     // currentEnemyPosition = Math.floor(Math.random() * cells.length)
     // console.log('Current number >', currentEnemyPosition)
     // enemyMovement()
@@ -80,67 +84,55 @@ function init() {
   }
 
   function enemyMovement() {
-    const direction = [-1, 1, width, -width]      // right, left, up, down
+    const direction = [1, -1, -width, width]      // right, left, up, down
     // getting random option from direction array
     let random = Math.floor(Math.random() * direction.length)
     let finallyStartMoving = direction[random]
     console.log('finally', finallyStartMoving)
     // console.log('Random >>', random)
     // ! random direction movement
-    // updating currentEnemyPosition with a random I've got
-    currentEnemyPosition += finallyStartMoving
-    if (currentEnemyPosition % width !== width - 1 && !cells[currentEnemyPosition].classList.contains('obstacle')) {      // ! Right
-      currentEnemyPosition
-    } else if (currentEnemyPosition % width !== 0 && !cells[currentEnemyPosition].classList.contains('obstacle')) {       // ! Left
+
+    removeEnemy(currentEnemyPosition)
+
+    // ! LETS TRY ONCE AGAIN - little bas*ard is finally moving, but not, he was moving all this time, even with my other solutions, but just behind the scene, aka walls
+
+    // In finallyStartMoving we get a direction. First we need to check if we can move there or is there something that prevents it, aka some sort of obstacles
+    // ? Let suppose there is something in the way, therefore we have to call finallyStartMoving for new direction, otherwise we are stuck
+    // ? Remember that each time the currentEnemyPosition value is updated!
+    if (currentEnemyPosition === cells[currentEnemyPosition].classList.contains('obstacles')) {
+      currentEnemyPosition += finallyStartMoving
+      // addEnemy(currentEnemyPosition)                    // We have to add our enemy to the new position
+    } 
+    // ? We get 1, so we want to move to the right
+    else if (finallyStartMoving === 1) {
+      currentEnemyPosition++
+      addEnemy(currentEnemyPosition)
+    }
+    // ? We get -1, so we want to move to the left
+    else if (finallyStartMoving === -1) {
       currentEnemyPosition--
-    } else if (currentEnemyPosition - width >= 0 && !cells[currentEnemyPosition].classList.contains('obstacle')) {        // ! Up
-      currentEnemyPosition -= width
-    } else if (currentEnemyPosition + width <= width * width - 1 && !cells[currentEnemyPosition].classList.contains('obstacle')) {  // ! Down
+      addEnemy(currentEnemyPosition)
+    }
+    // ? We get -20, so we want to move up
+    else if (finallyStartMoving === -width) {
+      currentEnemyPosition -= width       // aka 20 paces back, because our cell has a value of 20
+      addEnemy(currentEnemyPosition)
+    }
+    // ? We get +10, so we want to move down
+    else if (finallyStartMoving += width) {
       currentEnemyPosition += width
+      addEnemy(currentEnemyPosition)
     }
 
-      // if (cells[currentEnemyPosition + 1].classList.contains('obstacle')) {         // ! RIGHT
-      //   currentEnemyPosition += random 
-      // } else if (currentEnemyPosition % width !== width - 1) {
-      //   currentEnemyPosition++
-      // } else if (cells[currentEnemyPosition - 1].classList.contains('obstacle')) {  // ! LEFT
-      //   currentEnemyPosition -= random 
-      // } else if (currentEnemyPosition % width !== 0) {
-      //   currentEnemyPosition--
-      // } else if (cells[currentEnemyPosition - width].classList.contains('obstacle')) {  // ! UP
-      //   currentEnemyPosition += random 
-      // } else if (currentEnemyPosition - width >= 0) {
-      //   currentEnemyPosition -= width
-      // } else if (cells[currentEnemyPosition + width].classList.contains('obstacle')) {
-      //   currentEnemyPosition -= random 
-      // } else if (currentEnemyPosition + width <= width * width - 1) {
-      //   currentEnemyPosition += width
-      // }
+    // ! Find out why he is not obeying me and still travelling through walls 
 
-    // }
-    // if (currentEnemyPosition % width !== 0) {                       // ! LEFT MOVE
-    //   currentEnemyPosition--
-    //   console.log('left')
-    //   console.log('currentEnemyPosition >', currentEnemyPosition)
-    // }
-    // if (currentEnemyPosition - width >= 0) {                   // ! UP MOVE
-    //   currentEnemyPosition -= width
-    //   console.log('up')
-    //   console.log('currentEnemyPosition >', currentEnemyPosition)
-    // } 
-    // if (currentEnemyPosition + width <= width * width - 1) {   // ! DOWN
-    //   currentEnemyPosition += width
-    //   console.log('down')
-    //   console.log('currentEnemyPosition >', currentEnemyPosition)
-    // }
-    addEnemy(currentEnemyPosition)
   }
   
 
   
   const movement = setInterval(() => {
     enemyMovement()
-  }, 1000)
+  }, 2000)
   // clearTimeout(movement)
 
 
@@ -157,7 +149,7 @@ function init() {
 
 
   function handleKeyUp(event) {
-    console.log('position before key', currentMatrushkaPosition)
+    // console.log('position before key', currentMatrushkaPosition)
     const key = event.keyCode
     removeMatrushka(currentMatrushkaPosition)
 
@@ -205,9 +197,7 @@ function init() {
       console.log('DOWN')
       removeLittleBabushka()
       removeBigBabushka()
-    } else {
-      console.log('INVALID KEY')
-    }
+    } 
 
     addMatrushka(currentMatrushkaPosition)
   }
