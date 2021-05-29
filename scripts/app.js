@@ -50,7 +50,7 @@ function init() {
       cells.push(cell)    
      
       addObstacle(i)
-      // addLittleBabushka(i)
+      addLittleBabushka(i)
       addBigBabushka(i)
     }
     
@@ -64,7 +64,7 @@ function init() {
     handleKeyUp(event)
 
     // addMatrushka(matrushkaStartingPosition)
-    // enemyMovement()
+    enemyMovement()
   }
 
   // ! ENEMY
@@ -83,31 +83,56 @@ function init() {
     const direction = [-1, 1, width, -width]      // right, left, up, down
     // getting random option from direction array
     let random = Math.floor(Math.random() * direction.length)
+    let finallyStartMoving = direction[random]
+    console.log('finally', finallyStartMoving)
     // console.log('Random >>', random)
     // ! random direction movement
     // updating currentEnemyPosition with a random I've got
-    currentEnemyPosition = enemyStartingPosition
-    currentEnemyPosition += random 
-    if (currentEnemyPosition % width !== width - 1) {                 // ! RIGHT MOVE
-      currentEnemyPosition++
-      console.log('right')
-      console.log('currentEnemyPosition >', currentEnemyPosition)   
-    }
-    if (currentEnemyPosition % width !== 0) {                       // ! LEFT MOVE
+    currentEnemyPosition += finallyStartMoving
+    if (currentEnemyPosition % width !== width - 1 && !cells[currentEnemyPosition].classList.contains('obstacle')) {      // ! Right
+      currentEnemyPosition
+    } else if (currentEnemyPosition % width !== 0 && !cells[currentEnemyPosition].classList.contains('obstacle')) {       // ! Left
       currentEnemyPosition--
-      console.log('left')
-      console.log('currentEnemyPosition >', currentEnemyPosition)
-    }
-    if (currentEnemyPosition - width >= 0) {                   // ! UP MOVE
+    } else if (currentEnemyPosition - width >= 0 && !cells[currentEnemyPosition].classList.contains('obstacle')) {        // ! Up
       currentEnemyPosition -= width
-      console.log('up')
-      console.log('currentEnemyPosition >', currentEnemyPosition)
-    } 
-    if (currentEnemyPosition + width <= width * width - 1) {   // ! DOWN
+    } else if (currentEnemyPosition + width <= width * width - 1 && !cells[currentEnemyPosition].classList.contains('obstacle')) {  // ! Down
       currentEnemyPosition += width
-      console.log('down')
-      console.log('currentEnemyPosition >', currentEnemyPosition)
     }
+
+      // if (cells[currentEnemyPosition + 1].classList.contains('obstacle')) {         // ! RIGHT
+      //   currentEnemyPosition += random 
+      // } else if (currentEnemyPosition % width !== width - 1) {
+      //   currentEnemyPosition++
+      // } else if (cells[currentEnemyPosition - 1].classList.contains('obstacle')) {  // ! LEFT
+      //   currentEnemyPosition -= random 
+      // } else if (currentEnemyPosition % width !== 0) {
+      //   currentEnemyPosition--
+      // } else if (cells[currentEnemyPosition - width].classList.contains('obstacle')) {  // ! UP
+      //   currentEnemyPosition += random 
+      // } else if (currentEnemyPosition - width >= 0) {
+      //   currentEnemyPosition -= width
+      // } else if (cells[currentEnemyPosition + width].classList.contains('obstacle')) {
+      //   currentEnemyPosition -= random 
+      // } else if (currentEnemyPosition + width <= width * width - 1) {
+      //   currentEnemyPosition += width
+      // }
+
+    // }
+    // if (currentEnemyPosition % width !== 0) {                       // ! LEFT MOVE
+    //   currentEnemyPosition--
+    //   console.log('left')
+    //   console.log('currentEnemyPosition >', currentEnemyPosition)
+    // }
+    // if (currentEnemyPosition - width >= 0) {                   // ! UP MOVE
+    //   currentEnemyPosition -= width
+    //   console.log('up')
+    //   console.log('currentEnemyPosition >', currentEnemyPosition)
+    // } 
+    // if (currentEnemyPosition + width <= width * width - 1) {   // ! DOWN
+    //   currentEnemyPosition += width
+    //   console.log('down')
+    //   console.log('currentEnemyPosition >', currentEnemyPosition)
+    // }
     addEnemy(currentEnemyPosition)
   }
   
@@ -116,7 +141,7 @@ function init() {
   const movement = setInterval(() => {
     enemyMovement()
   }, 1000)
-  clearTimeout(movement)
+  // clearTimeout(movement)
 
 
 
@@ -136,7 +161,7 @@ function init() {
     const key = event.keyCode
     removeMatrushka(currentMatrushkaPosition)
 
-    if (key === 39) {                 // ! We are going right
+    if (key === 39) {                 // ! We are going RIGHT
       console.log('RIGHT')
       // We know that currentMatrushka doesn't have 'obstacle', but what about the next place, therefore we need to look into the future + 1
       // But if the future doesn't have na obstacle, than we continue with our journey. 
@@ -145,19 +170,41 @@ function init() {
       } else if (currentMatrushkaPosition % width !== width - 1) {
         currentMatrushkaPosition++
       }
-      // removeLittleBabushka()
-    } else if (key === 37 && currentMatrushkaPosition % width !== 0) {
+      removeLittleBabushka()
+      removeBigBabushka()
+    } else if (key === 37) {          // ! We are going LEFT
+      // As in previous case, on the left (- 1 position) we don't know what future holds. It it holdes an .obstacle, than we cannot move
+      // If there is nothing to hold us, we can continue with our journey.
       console.log('LEFT')
-      currentMatrushkaPosition--
-      // removeLittleBabushka()
-    } else if (key === 38 && currentMatrushkaPosition >= width) {
+      if (cells[currentMatrushkaPosition - 1].classList.contains('obstacle')) {
+        currentMatrushkaPosition -= 0
+      } else if (currentMatrushkaPosition % width !== 0) {
+        currentMatrushkaPosition--
+      }
+      removeLittleBabushka()
+      removeBigBabushka()
+    } else if (key === 38) {       // ! We are going UP
+      // We don't know if there is something above us. If there is Hell, we cannot continue, if there are Heavens we can continue.
       console.log('UP')
-      currentMatrushkaPosition -= width
-      // removeLittleBabushka()
-    } else if (key === 40 && currentMatrushkaPosition + width <= width * width - 1) {
+      if (cells[currentMatrushkaPosition - width].classList.contains('obstacle')) {
+        currentMatrushkaPosition
+      } else if (currentMatrushkaPosition >= width) {
+        currentMatrushkaPosition -= width
+      }
+      removeLittleBabushka()
+      removeBigBabushka()
+    } else if (key === 40) {      // ! We are going DOWN
+      // We don't know if there is something under us. If there is Hell, we cannot continue, otherwise we can continue.
       console.log('DOWN')
-      currentMatrushkaPosition += width
-      // removeLittleBabushka()
+      if (cells[currentMatrushkaPosition + width].classList.contains('obstacle')) {
+        currentMatrushkaPosition
+      }
+      else if (currentMatrushkaPosition + width <= width * width - 1) {
+        currentMatrushkaPosition += width
+      }
+      console.log('DOWN')
+      removeLittleBabushka()
+      removeBigBabushka()
     } else {
       console.log('INVALID KEY')
     }
@@ -203,27 +250,24 @@ function init() {
     }
   } 
 
-  // ! Adding little Babushka, for now just some random coind
+  // ! Adding little Babushka, for now just some random color
   function addLittleBabushka(index) {
     if (aMazeing[index] === 3) {
       cells[index].classList.add('points')
     }
   }
 
-
-
-  // // ! Remove little Babushka
-
-  function removeLittleBabushka(index) {
-    if (aMazeing[index] === 3 && currentMatrushkaPosition) {
-      cells[index].classList.remove('points')
+  // ! Removing little Babushka, not yet properly styled
+  function removeLittleBabushka() {
+    if (cells[currentMatrushkaPosition].classList.contains('points')) {
+      cells[currentMatrushkaPosition].classList.remove('points')
+      console.log('I am STILL here')
     }
+    // } else {
+    //   console.log('There is definitelly NO little babushka here!')
+    // }
   }
 
-  console.log('vanja', cells)
-  // function removeCat(position) {
-  //   cells[position].classList.remove(catClass)
-  // }
 
   // ! Adding big Babushka, not yet properly styled
   function addBigBabushka(index) {
@@ -232,6 +276,16 @@ function init() {
     }
   }
 
+  // ! Removing big Babushka, not zet properly styled
+
+  function removeBigBabushka(index) {
+    if (cells[currentMatrushkaPosition].classList.contains('bigPoints')) {
+      cells[currentMatrushkaPosition].classList.remove('bigPoints')
+      // console.log('I am STILL here')
+    } else {
+      console.log('There is definitely no big Babushka here!')
+    }
+  }
 
 
 
