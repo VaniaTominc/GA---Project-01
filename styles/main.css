@@ -5,7 +5,7 @@
 body {
   height: 100vh;
   margin: 0;
-  background-color: tomato;
+  background-color: #e3d5c1;
 }
 
 main {
@@ -23,23 +23,23 @@ main {
 }
 
 .maze {
-  background-color: white;
-  color: black
   align-items: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
   height: 600px;
   width: 600px;
+  border: 5px solid #8f0000;
+  border-radius: 10px;
 }
 
 .maze div {
-  border: 1px solid lightgrey;
   flex-grow: 1;
   height: 5%;
   width: 5%;
+  color: rgb(92, 21, 21);
+  text-align: center;
 }
 
 .desno {
@@ -55,3 +55,22 @@ main {
 .maze div.enemy {
   background-color: black; 
 }
+
+.maze div.obstacle {
+  background-color: #8f0000;
+}
+
+.maze div.points {
+  /* background-image: url('../images/coin.gif');
+  background-size: contain; */
+  background: yellow;
+}
+
+.maze div.bigPoints {
+  background-image: url('../images/heart\ \(1\).gif');
+  background-size: contain;
+}
+
+
+// 3 - Little Babushka aka Food
+  // 4 - Extra big Babushka aka Big Food
