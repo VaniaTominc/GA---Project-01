@@ -90,7 +90,7 @@ function init() {
     // getting random option from direction array
     let random = Math.floor(Math.random() * direction.length)
     let finallyStartMoving = direction[random]
-    // console.log('finally', finallyStartMoving)
+    console.log('finally', finallyStartMoving)
     // console.log('Random >>', random)
     // ! random direction movement
 
@@ -98,10 +98,11 @@ function init() {
 
     // ! LETS TRY ONCE AGAIN - little bas*ard is finally moving, but not, he was moving all this time, even with my other solutions, but just behind the scene, aka walls
 
+
     // In finallyStartMoving we get a direction. First we need to check if we can move there or is there something that prevents it, aka some sort of obstacles
     // ? Let suppose there is something in the way, therefore we have to call finallyStartMoving for new direction, otherwise we are stuck
     // ? Remember that each time the currentEnemyPosition value is updated!
-    if (currentEnemyPosition + finallyStartMoving === cells[currentEnemyPosition].classList.contains('obstacles')) {
+    // if (currentEnemyPosition + finallyStartMoving === cells[currentEnemyPosition].classList.contains('obstacles')) {
       // ! Trying to solve out why is he still travelling through walls in his big ghost fashion
       // ! Somehow I have to refactor this problem, some condition is clearly missing. LET ME THINK, STEP BY STEP!!!
       // ? If ghost has an obstacle in front on him, we have to prevent him from travelling and instead give him a new direction
@@ -110,37 +111,79 @@ function init() {
       // finallyStartMoving currentEnemyPosition += 0 // += finallyStartMoving
       // currentEnemyPosition += finallyStartMoving
       // addEnemy(currentEnemyPosition)                    // We have to add our enemy to the new position
-    } // ? If there is nothing, he can continue with his jounery. 
-    else {
-      currentEnemyPosition += finallyStartMoving
-      addEnemy(currentEnemyPosition)
-    }
+    //} // ? If there is nothing, he can continue with his jounery. 
+    //else {
+      // currentEnemyPosition += finallyStartMoving
+      // addEnemy(currentEnemyPosition)
+    // }
+
+    //  if (currentEnemyPosition + )
 
     // ! What if I turn the order of conditioins? Aka first checking if the road is clear
 
+    // if (finallyStartMoving === 1) {
+    //   if (cells[currentEnemyPosition + 1].classList.contains('obstacle')) {
+    //     currentEnemyPosition += 0
+    //   } else if (currentEnemyPosition % width !== width - 1) {          
+    //     currentEnemyPosition++
+    //     addEnemy(currentEnemyPosition)
+    //   } 
+    // } else if (finallyStartMoving === -1) {
+    //   if (cells[currentEnemyPosition - 1].classList.contains('obstacle')) {
+    //     currentEnemyPosition -= 0
+    //   } else if (currentEnemyPosition % width !== 0) {
+    //     currentEnemyPosition--
+    //     addEnemy(currentEnemyPosition)
+    //   }
+    // } else if (finallyStartMoving === -width) {
+    //   if (cells[currentEnemyPosition - width].classList.contains('obstacle')) {
+    //     currentEnemyPosition
+    //   } else if (currentEnemyPosition >= width) {
+    //     currentEnemyPosition -= width
+    //     addEnemy(currentEnemyPosition)
+    //   }
+    // } else if (finallyStartMoving === width) {
+    //   if (cells[currentEnemyPosition + width].classList.contains('obstacle')) {
+    //     currentEnemyPosition
+    //   } else if (currentEnemyPosition + width <= width * width - 1) {
+    //     currentEnemyPosition += width
+    //     addEnemy(currentEnemyPosition)
+    //   }
+    // }
+    
 
-    // // ? We get 1, so we want to move to the right
-    // else if (finallyStartMoving === 1 && finallyStartMoving + 1 !== cells[currentEnemyPosition].classList.contains('obstacles')) {
+    // if (finallyStartMoving === 1 && !cells[currentEnemyPosition + 1].classList.contains('obstacles')) {
     //   currentEnemyPosition++
     //   addEnemy(currentEnemyPosition)
     // }
     // // ? We get -1, so we want to move to the left
-    // else if (finallyStartMoving === -1 && finallyStartMoving - 1 !== cells[currentEnemyPosition].classList.contains('obstacles')) {
+    // else if (finallyStartMoving === -1 && !cells[currentEnemyPosition - 1].classList.contains('obstacles')) {
     //   currentEnemyPosition--
     //   addEnemy(currentEnemyPosition)
     // }
     // // ? We get -20, so we want to move up
-    // else if (finallyStartMoving === -width && finallyStartMoving - width !== cells[currentEnemyPosition].classList.contains('obstacles')) {
+    // else if (finallyStartMoving === -width && !cells[currentEnemyPosition - 20].classList.contains('obstacles')) {
     //   currentEnemyPosition -= width       // aka 20 paces back, because our cell has a value of 20
     //   addEnemy(currentEnemyPosition)
     // }
-    // // ? We get +10, so we want to move down
-    // else if (finallyStartMoving += width && finallyStartMoving + width !== cells[currentEnemyPosition].classList.contains('obstacles')) {
+    // // ? We get +20, so we want to move down
+    // else if (finallyStartMoving === width && !cells[currentEnemyPosition + 20].classList.contains('obstacles')) {
     //   currentEnemyPosition += width
+    //   addEnemy(currentEnemyPosition)
+    // } else {
+    //   currentEnemyPosition += 0
     //   addEnemy(currentEnemyPosition)
     // }
 
-     // ! Find out why he is not obeying me and still travelling through walls 
+    // if (currentEnemyPosition + finallyStartMoving === cells[currentEnemyPosition].classList.contains('obstacles')) {
+    //   currentEnemyPosition += 0 // += finallyStartMoving
+    //   addEnemy(currentEnemyPosition)                    // We have to add our enemy to the new position
+    // } else {
+    //   currentEnemyPosition += finallyStartMoving
+    //   addEnemy(currentEnemyPosition)
+    // }
+
+    // ! Find out why he is not obeying me and still travelling through walls 
 
 
   }
@@ -149,8 +192,8 @@ function init() {
   
   const movement = setInterval(() => {
     enemyMovement()
-  }, 1000)
-  // clearTimeout(movement)
+  }, 100)
+  clearTimeout(movement)
 
 
 
@@ -176,7 +219,7 @@ function init() {
       // But if the future doesn't have na obstacle, than we continue with our journey. 
       if (cells[currentMatrushkaPosition + 1].classList.contains('obstacle')) {
         currentMatrushkaPosition += 0
-      } else if (currentMatrushkaPosition + 1) {          // ? <= same => (currentMatrushkaPosition % width !== width - 1)
+      } else if (currentMatrushkaPosition % width !== width - 1) {          // ? <= was trying with but it started to go through the border => (currentMAtrushkaPosition + 1)
         currentMatrushkaPosition++
         // console.log('WAHEY!')
         // countBabushkaPoints += 1
@@ -194,7 +237,7 @@ function init() {
       console.log('LEFT')
       if (cells[currentMatrushkaPosition - 1].classList.contains('obstacle')) {
         currentMatrushkaPosition -= 0
-      } else if (currentMatrushkaPosition - 1) {         // ? <= same => (currentMatrushkaPosition % width !== 0)
+      } else if (currentMatrushkaPosition % width !== 0) {         // ? <= was trying with but it started to go through the border => (currentMatrushkaPosition - 1)
         currentMatrushkaPosition--
         // countBabushkaPoints += 1
         // babushkaScore.innerText = parseFloat(countBabushkaPoints)
@@ -212,7 +255,7 @@ function init() {
       console.log('UP')
       if (cells[currentMatrushkaPosition - width].classList.contains('obstacle')) {
         currentMatrushkaPosition
-      } else if (currentMatrushkaPosition - width) {    // ? <= same => (currentMatrushkaPosition >= width)
+      } else if (currentMatrushkaPosition > width) {    // ? <= was trying with but it started to go through the border => (currentMatrushkaPosition - width)
         currentMatrushkaPosition -= width
         gettingSmallBabushka()
         gettingBigBabushka()
@@ -225,7 +268,7 @@ function init() {
       if (cells[currentMatrushkaPosition + width].classList.contains('obstacle')) {
         currentMatrushkaPosition
       }
-      else if (currentMatrushkaPosition + width) {      // ? <= same => (currentMatrushkaPosition + width <= width * width - 1)
+      else if (currentMatrushkaPosition + width <= width * width - 1) {      // ? <= was trying with but it started to go through the border => (currentMatrushkaPosition + width)
         currentMatrushkaPosition += width
         gettingSmallBabushka()
         gettingBigBabushka()
