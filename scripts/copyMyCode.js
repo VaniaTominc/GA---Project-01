@@ -45,7 +45,6 @@ function init() {
   const enemyStartingPosition = 150
   let currentEnemyPosition = 150
   // console.log(currentEnemyPosition)
-  const enemyClass = 'enemy'
 
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {               // It is going to repeat 200 times (because of 20 * 20)
@@ -66,11 +65,11 @@ function init() {
     // console.log('cells >', cells)
     // currentEnemyPosition = Math.floor(Math.random() * cells.length)
     // console.log('Current number >', currentEnemyPosition)
-    enemyMovement()
+    // enemyMovement()
     handleKeyUp(event)
 
     // addMatrushka(matrushkaStartingPosition)
-    // enemyMovement()
+    enemyMovement()
   }
 
   // ! ENEMY
@@ -90,52 +89,40 @@ function init() {
     // getting random option from direction array
     let random = Math.floor(Math.random() * direction.length)
     let finallyStartMoving = direction[random]
-    // console.log('finally', finallyStartMoving)
+    console.log('finally', finallyStartMoving)
     // console.log('Random >>', random)
     // ! random direction movement
 
     removeEnemy(currentEnemyPosition)
 
-    // ! LETS TRY ONCE AGAIN - little bas*ard is finally moving, but not, he was moving all this time, even with my other solutions, but just behind the scene, aka walls
-
-    // In finallyStartMoving we get a direction. First we need to check if we can move there or is there something that prevents it, aka some sort of obstacles
+    // ! LETS TRY ONCE AGAIN - little bas*ard is finally moving, well, he was moving all this time, even with my other solutions, but just behind the scene, aka walls
+    // ? In finallyStartMoving we get a direction. 
     // ? Let suppose there is something in the way, therefore we have to call finallyStartMoving for new direction, otherwise we are stuck
     // ? Remember that each time the currentEnemyPosition value is updated!
     if (currentEnemyPosition + finallyStartMoving === cells[currentEnemyPosition].classList.contains('obstacles')) {
-      // ! Trying to solve out why is he still travelling through walls in his big ghost fashion
-      // ! Somehow I have to refactor this problem, some condition is clearly missing. LET ME THINK, STEP BY STEP!!!
-      // ? If ghost has an obstacle in front on him, we have to prevent him from travelling and instead give him a new direction
-      // ? If there is something, he needs to get new orders, aka new random direction. 
-      // currentEnemyPosition += 0
-      // finallyStartMoving currentEnemyPosition += 0 // += finallyStartMoving
-      // currentEnemyPosition += finallyStartMoving
-      // addEnemy(currentEnemyPosition)                    // We have to add our enemy to the new position
-    } // ? If there is nothing, he can continue with his jounery. 
-    else {
+      currentEnemyPosition += 0 // += finallyStartMoving
+      addEnemy(currentEnemyPosition)                    // We have to add our enemy to the new position
+    } else {
       currentEnemyPosition += finallyStartMoving
       addEnemy(currentEnemyPosition)
     }
-
-    // ! What if I turn the order of conditioins? Aka first checking if the road is clear
-
-
     // // ? We get 1, so we want to move to the right
-    // else if (finallyStartMoving === 1 && finallyStartMoving + 1 !== cells[currentEnemyPosition].classList.contains('obstacles')) {
+    // else if (finallyStartMoving === 1) {
     //   currentEnemyPosition++
     //   addEnemy(currentEnemyPosition)
     // }
     // // ? We get -1, so we want to move to the left
-    // else if (finallyStartMoving === -1 && finallyStartMoving - 1 !== cells[currentEnemyPosition].classList.contains('obstacles')) {
+    // else if (finallyStartMoving === -1) {
     //   currentEnemyPosition--
     //   addEnemy(currentEnemyPosition)
     // }
     // // ? We get -20, so we want to move up
-    // else if (finallyStartMoving === -width && finallyStartMoving - width !== cells[currentEnemyPosition].classList.contains('obstacles')) {
+    // else if (finallyStartMoving === -width) {
     //   currentEnemyPosition -= width       // aka 20 paces back, because our cell has a value of 20
     //   addEnemy(currentEnemyPosition)
     // }
     // // ? We get +10, so we want to move down
-    // else if (finallyStartMoving += width && finallyStartMoving + width !== cells[currentEnemyPosition].classList.contains('obstacles')) {
+    // else if (finallyStartMoving += width) {
     //   currentEnemyPosition += width
     //   addEnemy(currentEnemyPosition)
     // }
@@ -149,8 +136,8 @@ function init() {
   
   const movement = setInterval(() => {
     enemyMovement()
-  }, 1000)
-  // clearTimeout(movement)
+  }, 2000)
+  clearTimeout(movement)
 
 
 

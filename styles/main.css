@@ -60,17 +60,15 @@ main {
   background-color: #8f0000;
 }
 
-.maze div.points {
+.maze div.points {                                          /* Little Babushka */
   /* background-image: url('../images/coin.gif');
   background-size: contain; */
   /* background: rgba(255, 255, 0, 0.179);  */
 }
 
-.maze div.bigPoints {
+.maze div.bigPoints {                                       /* Small Babushka */
   background-image: url('../images/heart\ \(1\).gif');
   background-size: contain;
 }
 
 
-// 3 - Little Babushka aka Food
-  // 4 - Extra big Babushka aka Big Food
