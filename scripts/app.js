@@ -37,6 +37,11 @@ function init() {
   let countBabushkaPoints = 0
   // console.log(typeof(countBabushkaPoints))
 
+  const livesLeft = document.querySelector('.livesLeft')
+  // console.log('livesLeft >', livesLeft)
+  let countLives = 3
+  
+
 
   const matrushkaStartingPosition = 389
   let currentMatrushkaPosition = 389
@@ -85,6 +90,18 @@ function init() {
     cells[position].classList.remove(enemyClass)
   }
 
+  // ! LIVES
+
+  // ? Let check lives. We are going to check them inside enemyMovement
+  // ? If babushka is taken by an enemy, you lose your life
+  // ? The counter needs to be accordingly updated
+  // ? At the same time I need to check if I have enough lives to continue otherwise game over
+
+  function reduceLives() {
+    countLives--
+    livesLeft.innerText = parseFloat(countLives)
+  }
+
   function enemyMovement() {
     const direction = [1, -1, -width, width]      // right, left, up, down
     // getting random option from direction array
@@ -96,24 +113,36 @@ function init() {
 
     removeEnemy(currentEnemyPosition)
 
+    // ! CHECKING FOR IF ENEMY CAPTURES BABUSHKA
+
+    if (cells[currentEnemyPosition] === cells[currentMatrushkaPosition]) {
+      reduceLives()
+      //    console.log('You lost a life!!!!')
+      if (countLives !== 0) {
+        restartGame()
+      } else {
+        gameOverCheck()
+      }
+    }
+
     // ! LETS TRY ONCE AGAIN - little bas*ard is finally moving, but not, he was moving all this time, even with my other solutions, but just behind the scene, aka walls
     // ! I think, I might have found some sort of solution, or at least I hope soo. 
 
     // ? If the way in front of us contains the obstacle, don't go there.
     if (cells[currentEnemyPosition + finallyStartMoving].classList.contains('obstacle')) {
-      console.log('Sorry buddy, but you cannot go there')
+      // console.log('Sorry buddy, but you cannot go there')
       // Need to make sure, he does not moves from this position, otherwise he will ghost me through walls once again :(
       currentEnemyPosition += 0
       addEnemy(currentEnemyPosition)
-      console.log('I am stuck at the same position, please help me', currentEnemyPosition)
+      // console.log('I am stuck at the same position, please help me', currentEnemyPosition)
     }
     // ? If he can go there, then update the current direction with the direction you've got from finallyStartMoving
     else {
-      console.log('Whahey, we can go!')
+      // console.log('Whahey, we can go!')
       // Now I need to make sure the way is updated with the direction we've got. 
       currentEnemyPosition += finallyStartMoving
       addEnemy(currentEnemyPosition)
-      console.log('Am I moving with new position?', currentEnemyPosition)
+      // console.log('Am I moving with new position?', currentEnemyPosition)
     }
 
   }
@@ -122,7 +151,7 @@ function init() {
   
   const movement = setInterval(() => {
     enemyMovement()
-  }, 500)
+  }, 200)
   // clearTimeout(movement)
 
 
@@ -300,6 +329,35 @@ function init() {
       countBabushkaPoints += 100
       babushkaScore.innerText = parseFloat(countBabushkaPoints)
     }
+  }
+
+  // ! Restarting game after loosing life // I still need to find a way how to put enemy and babushka back at the starting position
+
+  function restartGame() {
+    clearTimeout(movement)
+    currentMatrushkaPosition = 389
+    currentEnemyPosition = 150
+    countBabushkaPoints
+    countLives
+    // enemyMovement()
+    console.log('RESTARTING')
+  }
+
+
+  // ! Checking for game over
+
+  function gameOverCheck() {
+    if (countLives === 0) {            
+      setTimeout(endGame, 10)
+      clearTimeout(movement)
+    }
+  }
+
+  // ! End game
+
+  function endGame() {
+    if (confirm('GAME OVER'))
+    window.location.reload
   }
 
 
