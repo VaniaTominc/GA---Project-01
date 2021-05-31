@@ -97,94 +97,24 @@ function init() {
     removeEnemy(currentEnemyPosition)
 
     // ! LETS TRY ONCE AGAIN - little bas*ard is finally moving, but not, he was moving all this time, even with my other solutions, but just behind the scene, aka walls
+    // ! I think, I might have found some sort of solution, or at least I hope soo. 
 
-
-    // In finallyStartMoving we get a direction. First we need to check if we can move there or is there something that prevents it, aka some sort of obstacles
-    // ? Let suppose there is something in the way, therefore we have to call finallyStartMoving for new direction, otherwise we are stuck
-    // ? Remember that each time the currentEnemyPosition value is updated!
-    // if (currentEnemyPosition + finallyStartMoving === cells[currentEnemyPosition].classList.contains('obstacles')) {
-      // ! Trying to solve out why is he still travelling through walls in his big ghost fashion
-      // ! Somehow I have to refactor this problem, some condition is clearly missing. LET ME THINK, STEP BY STEP!!!
-      // ? If ghost has an obstacle in front on him, we have to prevent him from travelling and instead give him a new direction
-      // ? If there is something, he needs to get new orders, aka new random direction. 
-      // currentEnemyPosition += 0
-      // finallyStartMoving currentEnemyPosition += 0 // += finallyStartMoving
-      // currentEnemyPosition += finallyStartMoving
-      // addEnemy(currentEnemyPosition)                    // We have to add our enemy to the new position
-    //} // ? If there is nothing, he can continue with his jounery. 
-    //else {
-      // currentEnemyPosition += finallyStartMoving
-      // addEnemy(currentEnemyPosition)
-    // }
-
-    //  if (currentEnemyPosition + )
-
-    // ! What if I turn the order of conditioins? Aka first checking if the road is clear
-
-    // if (finallyStartMoving === 1) {
-    //   if (cells[currentEnemyPosition + 1].classList.contains('obstacle')) {
-    //     currentEnemyPosition += 0
-    //   } else if (currentEnemyPosition % width !== width - 1) {          
-    //     currentEnemyPosition++
-    //     addEnemy(currentEnemyPosition)
-    //   } 
-    // } else if (finallyStartMoving === -1) {
-    //   if (cells[currentEnemyPosition - 1].classList.contains('obstacle')) {
-    //     currentEnemyPosition -= 0
-    //   } else if (currentEnemyPosition % width !== 0) {
-    //     currentEnemyPosition--
-    //     addEnemy(currentEnemyPosition)
-    //   }
-    // } else if (finallyStartMoving === -width) {
-    //   if (cells[currentEnemyPosition - width].classList.contains('obstacle')) {
-    //     currentEnemyPosition
-    //   } else if (currentEnemyPosition >= width) {
-    //     currentEnemyPosition -= width
-    //     addEnemy(currentEnemyPosition)
-    //   }
-    // } else if (finallyStartMoving === width) {
-    //   if (cells[currentEnemyPosition + width].classList.contains('obstacle')) {
-    //     currentEnemyPosition
-    //   } else if (currentEnemyPosition + width <= width * width - 1) {
-    //     currentEnemyPosition += width
-    //     addEnemy(currentEnemyPosition)
-    //   }
-    // }
-    
-
-    // if (finallyStartMoving === 1 && !cells[currentEnemyPosition + 1].classList.contains('obstacles')) {
-    //   currentEnemyPosition++
-    //   addEnemy(currentEnemyPosition)
-    // }
-    // // ? We get -1, so we want to move to the left
-    // else if (finallyStartMoving === -1 && !cells[currentEnemyPosition - 1].classList.contains('obstacles')) {
-    //   currentEnemyPosition--
-    //   addEnemy(currentEnemyPosition)
-    // }
-    // // ? We get -20, so we want to move up
-    // else if (finallyStartMoving === -width && !cells[currentEnemyPosition - 20].classList.contains('obstacles')) {
-    //   currentEnemyPosition -= width       // aka 20 paces back, because our cell has a value of 20
-    //   addEnemy(currentEnemyPosition)
-    // }
-    // // ? We get +20, so we want to move down
-    // else if (finallyStartMoving === width && !cells[currentEnemyPosition + 20].classList.contains('obstacles')) {
-    //   currentEnemyPosition += width
-    //   addEnemy(currentEnemyPosition)
-    // } else {
-    //   currentEnemyPosition += 0
-    //   addEnemy(currentEnemyPosition)
-    // }
-
-    // if (currentEnemyPosition + finallyStartMoving === cells[currentEnemyPosition].classList.contains('obstacles')) {
-    //   currentEnemyPosition += 0 // += finallyStartMoving
-    //   addEnemy(currentEnemyPosition)                    // We have to add our enemy to the new position
-    // } else {
-    //   currentEnemyPosition += finallyStartMoving
-    //   addEnemy(currentEnemyPosition)
-    // }
-
-    // ! Find out why he is not obeying me and still travelling through walls 
-
+    // ? If the way in front of us contains the obstacle, don't go there.
+    if (cells[currentEnemyPosition + finallyStartMoving].classList.contains('obstacle')) {
+      console.log('Sorry buddy, but you cannot go there')
+      // Need to make sure, he does not moves from this position, otherwise he will ghost me through walls once again :(
+      currentEnemyPosition += 0
+      addEnemy(currentEnemyPosition)
+      console.log('I am stuck at the same position, please help me', currentEnemyPosition)
+    }
+    // ? If he can go there, then update the current direction with the direction you've got from finallyStartMoving
+    else {
+      console.log('Whahey, we can go!')
+      // Now I need to make sure the way is updated with the direction we've got. 
+      currentEnemyPosition += finallyStartMoving
+      addEnemy(currentEnemyPosition)
+      console.log('Am I moving with new position?', currentEnemyPosition)
+    }
 
   }
   
@@ -192,8 +122,8 @@ function init() {
   
   const movement = setInterval(() => {
     enemyMovement()
-  }, 100)
-  clearTimeout(movement)
+  }, 500)
+  // clearTimeout(movement)
 
 
 
