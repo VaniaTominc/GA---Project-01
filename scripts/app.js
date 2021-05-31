@@ -1,7 +1,6 @@
 function init() {
   const maze = document.querySelector('.maze')
   const startButton = document.querySelector('button')
-  // console.log(startButton)
 
   const width = 20
   const cellCount = width * width
@@ -52,6 +51,21 @@ function init() {
   // console.log(currentEnemyPosition)
   const enemyClass = 'enemy'
 
+  // ! START GAME
+
+  let timer
+
+  function startGame() {
+    startButton.disabled = true
+    clearInterval(timer)
+    enemyMovement()
+    timer = setInterval(() => {
+      handleKeyUp()
+      // gameOverCheck
+    }, 1000)
+    
+  }
+
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {               // It is going to repeat 200 times (because of 20 * 20)
       const cell = document.createElement('div')        // Creating a div. 
@@ -71,8 +85,8 @@ function init() {
     // console.log('cells >', cells)
     // currentEnemyPosition = Math.floor(Math.random() * cells.length)
     // console.log('Current number >', currentEnemyPosition)
-    enemyMovement()
-    handleKeyUp(event)
+    // enemyMovement()
+    // handleKeyUp(event)
 
     // addMatrushka(matrushkaStartingPosition)
     // enemyMovement()
@@ -102,56 +116,58 @@ function init() {
     livesLeft.innerText = parseFloat(countLives)
   }
 
+  let movement
+
   function enemyMovement() {
-    const direction = [1, -1, -width, width]      // right, left, up, down
-    // getting random option from direction array
-    let random = Math.floor(Math.random() * direction.length)
-    let finallyStartMoving = direction[random]
-    console.log('finally', finallyStartMoving)
-    // console.log('Random >>', random)
-    // ! random direction movement
+    movement = setInterval(() => {
+      const direction = [1, -1, -width, width]      // right, left, up, down
+      // getting random option from direction array
+      const random = Math.floor(Math.random() * direction.length)
+      const finallyStartMoving = direction[random]
+      console.log('finally', finallyStartMoving)
+      // console.log('Random >>', random)
+      // ! random direction movement
 
-    removeEnemy(currentEnemyPosition)
-
+      removeEnemy(currentEnemyPosition)
     // ! CHECKING FOR IF ENEMY CAPTURES BABUSHKA
 
-    if (cells[currentEnemyPosition] === cells[currentMatrushkaPosition]) {
-      reduceLives()
-      //    console.log('You lost a life!!!!')
-      if (countLives !== 0) {
-        restartGame()
-      } else {
-        gameOverCheck()
+      if (cells[currentEnemyPosition] === cells[currentMatrushkaPosition]) {
+        reduceLives()
+        //    console.log('You lost a life!!!!')
+        if (countLives !== 0) {
+          restartGame()
+        } else {
+          gameOverCheck()
+        }
       }
-    }
 
     // ! LETS TRY ONCE AGAIN - little bas*ard is finally moving, but not, he was moving all this time, even with my other solutions, but just behind the scene, aka walls
     // ! I think, I might have found some sort of solution, or at least I hope soo. 
 
     // ? If the way in front of us contains the obstacle, don't go there.
-    if (cells[currentEnemyPosition + finallyStartMoving].classList.contains('obstacle')) {
-      // console.log('Sorry buddy, but you cannot go there')
-      // Need to make sure, he does not moves from this position, otherwise he will ghost me through walls once again :(
-      currentEnemyPosition += 0
-      addEnemy(currentEnemyPosition)
-      // console.log('I am stuck at the same position, please help me', currentEnemyPosition)
-    }
-    // ? If he can go there, then update the current direction with the direction you've got from finallyStartMoving
-    else {
-      // console.log('Whahey, we can go!')
-      // Now I need to make sure the way is updated with the direction we've got. 
-      currentEnemyPosition += finallyStartMoving
-      addEnemy(currentEnemyPosition)
-      // console.log('Am I moving with new position?', currentEnemyPosition)
-    }
-
+      if (cells[currentEnemyPosition + finallyStartMoving].classList.contains('obstacle')) {
+        // console.log('Sorry buddy, but you cannot go there')
+        // Need to make sure, he does not moves from this position, otherwise he will ghost me through walls once again :(
+        currentEnemyPosition += 0
+        addEnemy(currentEnemyPosition)
+        console.log('I am stuck at the same position, please help me', currentEnemyPosition)
+      }
+      // ? If he can go there, then update the current direction with the direction you've got from finallyStartMoving
+      else {
+        // console.log('Whahey, we can go!')
+        // Now I need to make sure the way is updated with the direction we've got. 
+        currentEnemyPosition += finallyStartMoving
+        addEnemy(currentEnemyPosition)
+        // console.log('Am I moving with new position?', currentEnemyPosition)
+      }
+    }, 200)
   }
   
 
   
-  const movement = setInterval(() => {
-    enemyMovement()
-  }, 200)
+  // const movement = setInterval(() => {
+  //   enemyMovement()
+  // }, 200)
   // clearTimeout(movement)
 
 
@@ -331,6 +347,7 @@ function init() {
     }
   }
 
+
   // ! Restarting game after loosing life // I still need to find a way how to put enemy and babushka back at the starting position
 
   function restartGame() {
@@ -350,6 +367,8 @@ function init() {
     if (countLives === 0) {            
       setTimeout(endGame, 10)
       clearTimeout(movement)
+      // window.location.reload()
+      startGame()
     }
   }
 
@@ -363,7 +382,8 @@ function init() {
 
 
   // ! Event listener for keyboard keys.
-  document.addEventListener('keyup', handleKeyUp)
+  let handleControlers = document.addEventListener('keyup', handleKeyUp)
+  startButton.addEventListener('click', startGame)
 
   // createGrid(matrushkaStartingPosition)
   // createGrid(enemyStartingPosition)
