@@ -46,6 +46,8 @@ function init() {
   let currentMatrushkaPosition = 389
   const matrushkaClass = 'matrushka'
 
+  
+
   const enemyStartingPosition = 150
   let currentEnemyPosition = 150
   // console.log(currentEnemyPosition)
@@ -55,13 +57,12 @@ function init() {
 
   let timer
 
-
   function startGame() {
     startButton.disabled = true
     clearInterval(timer)
     enemyMovement()
     timer = setInterval(() => {
-      // handleKeyUp()
+      handleKeyUp()
       // gameOverCheck
     }, 1000)
     
@@ -136,9 +137,9 @@ function init() {
         reduceLives()
         //    console.log('You lost a life!!!!')
         if (countLives !== 0) {
-          gameOverCheck()
+          restartGame()
         } else {
-          endGame()
+          gameOverCheck()
         }
       }
 
@@ -161,7 +162,7 @@ function init() {
         addEnemy(currentEnemyPosition)
         // console.log('Am I moving with new position?', currentEnemyPosition)
       }
-    }, 100)
+    }, 200)
   }
   
 
@@ -349,54 +350,52 @@ function init() {
   }
 
 
-  // ! Checking for game over 
-  // ? I somehow, by mistake, managed to recreate original pacman thing of when restarting you don't get all coins back, but you are just left the one still uneaten.
-  function gameOverCheck() {
-    clearTimeout(movement)
-    startButton.disabled = false
-    removeMatrushka(currentMatrushkaPosition)
-    removeEnemy(currentEnemyPosition)
-    currentMatrushkaPosition = 389
-    currentEnemyPosition = 150
-    addMatrushka(currentMatrushkaPosition)
-    addEnemy(currentEnemyPosition)
-    countBabushkaPoints = 0
-    // babushkaScore.innerText = parseFloat(countBabushkaPoints)
-    countLives
-    // enemyMovement()
-    console.log('RESTARTING')
-  }
+  // ! Restarting game after loosing life // I still need to find a way how to put enemy and babushka back at the starting position
+
+  // function restartGame() {
+  //   clearTimeout(movement)
+  //   startButton.disabled = false
+  //   removeMatrushka(currentMatrushkaPosition)
+  //   removeEnemy(currentEnemyPosition)
+  //   currentMatrushkaPosition = 389
+  //   currentEnemyPosition = 150
+  //   addMatrushka(currentMatrushkaPosition)
+  //   addEnemy(currentEnemyPosition)
+  //   countBabushkaPoints()
+  //   countLives()
+  //   // enemyMovement()
+  //   console.log('RESTARTING')
+  // }
 
 
   // ! Checking for game over
 
   // function gameOverCheck() {
-  //   if (countLives === 0) {            
-  //     setTimeout(endGame, 10)
+  //   if (countLives === 0) {   
+  //     startButton.disabled = false         
   //     clearTimeout(movement)
-  //     // window.location.reload()
+  //     removeEnemy(currentEnemyPosition)
+  //     removeMatrushka(currentMatrushkaPosition)
+  //     addMatrushka(currentMatrushkaPosition)
+  //     addEnemy(currentEnemyPosition)
+  //     countBabushkaPoints()
+  //     countLives()
+  //     window.location.reload()
   //     startGame()
   //   }
   // }
 
   // ! End game
 
-  function endGame() {
-    removeMatrushka(currentMatrushkaPosition)
-    removeEnemy(currentEnemyPosition)
-    currentMatrushkaPosition = 389
-    currentEnemyPosition = 150
-    addMatrushka(currentEnemyPosition)
-    addEnemy(currentEnemyPosition)
-    startGame()
-    window.location.reload()
-    console.log('THE END')
-  }
+  // function endGame() {
+  //   if (confirm('GAME OVER'))
+  //   window.location.reload
+  // }
 
 
 
   // ! Event listener for keyboard keys.
-  let handleControlers = document.addEventListener('keyup', handleKeyUp)
+  document.addEventListener('keyup', handleKeyUp)
   startButton.addEventListener('click', startGame)
 
   // createGrid(matrushkaStartingPosition)
