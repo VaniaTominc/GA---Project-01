@@ -5,7 +5,27 @@
 body {
   height: 100vh;
   margin: 0;
+  /* display: flex;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center; */
+  background-color: black;
+  /* background-image: linear-gradient(#e3d5c1 90%, #8f0000) */
+}
+
+.insider {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 94%;
+  margin-left: 3%;
+  margin-right: 3%;
+  border: 1px solid black;
   background-color: #e3d5c1;
+}
+
+header {
+  margin-top: 50px;
 }
 
 main {
@@ -20,6 +40,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  margin-top: -130px;
 }
 
 .maze {
@@ -30,8 +52,8 @@ main {
   justify-content: center;
   height: 600px;
   width: 600px;
-  border: 5px solid #8f0000;
-  border-radius: 10px;
+  border: 10px solid #8f0000;
+  border-radius: 15px;
 }
 
 .maze div {
@@ -43,12 +65,17 @@ main {
 }
 
 .right {
-  width: 200px;
+  width: 400px;
   text-align: center;
+  border: 1px solid red;
+  margin-left: 50px;
 }
 
 .maze div.matrushka {
-  background-color: purple;
+  /* background-color: purple; */
+  background-image: url('../images/Hero.png');
+  background-size: 80%;
+  background-repeat: no-repeat;
   cursor: pointer;
 }
 
@@ -57,18 +84,31 @@ main {
 }
 
 .maze div.obstacle {
-  background-color: #8f0000;
+  background-color: #8c8670;
+  background-image: linear-gradient( black);
 }
 
 .maze div.points {                                          /* Little Babushka */
-  /* background-image: url('../images/coin.gif');
-  background-size: contain; */
-  /* background: rgba(255, 255, 0, 0.179);  */
+  /* background-image: url('../images/rsz_clipartkey_1773009.png');
+  background-repeat: no-repeat;
+  background-size: 25%;
+  background-position: 50%; */
+  background-image: radial-gradient(#8f0000 20%, transparent 20%);
+  
 }
 
 .maze div.bigPoints {                                       /* Small Babushka */
-  background-image: url('../images/heart\ \(1\).gif');
-  background-size: contain;
+  background-image: url('../images/rsz_clipartkey_1773009.png');
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: 50%;
 }
 
+/* div#backgroundBabushka {
+  background-image: url('ClipartKey_1041184.png');
+} */
+
+.audio-image {
+  position: absolute;
+}
 

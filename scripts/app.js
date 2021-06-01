@@ -7,26 +7,26 @@ function init() {
   const cells = []
 
   const aMazeing = [
-    4, 3, 3, 3, 3, 2, 2, 2, 2, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 4,
-    3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 2, 2, 2, 2, 2, 3,
-    3, 2, 3, 3, 3, 2, 2, 2, 3, 3, 2, 2, 2, 3, 3, 3, 3, 3, 2, 3,
-    3, 2, 2, 2, 3, 2, 5, 2, 3, 3, 2, 5, 2, 3, 2, 3, 2, 3, 3, 3,
-    3, 2, 5, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2, 3, 2, 3, 3, 2,
-    3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 3, 2,
-    3, 3, 3, 3, 3, 3, 2, 2, 2, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 2,
-    3, 2, 3, 2, 2, 2, 2, 3, 3, 3, 1, 3, 3, 3, 2, 2, 2, 2, 3, 2,
-    2, 2, 3, 3, 3, 3, 2, 3, 2, 2, 6, 2, 2, 3, 2, 3, 3, 3, 3, 2,
-    2, 3, 3, 3, 2, 3, 2, 3, 2, 6, 6, 6, 2, 3, 3, 3, 2, 2, 3, 2,
-    2, 3, 2, 3, 2, 3, 3, 3, 2, 2, 2, 2, 2, 3, 2, 3, 3, 3, 3, 2,
-    3, 3, 2, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 3, 2,
-    3, 2, 2, 2, 2, 2, 2, 3, 2, 3, 3, 2, 2, 3, 2, 3, 2, 3, 3, 2, 
-    3, 3, 3, 3, 2, 3, 3, 3, 2, 3, 2, 2, 3, 3, 3, 3, 3, 3, 3, 2,
-    2, 3, 2, 3, 3, 3, 2, 3, 2, 2, 3, 3, 3, 2, 2, 2, 3, 2, 2, 2,
-    3, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 2, 3, 2, 5, 2, 3, 3, 3, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+    2, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 2,
+    2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 2,
+    2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 2,
+    2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 3, 2, 2, 2, 3, 2, 3, 2, 3, 2,
+    2, 3, 2, 5, 2, 3, 2, 5, 2, 3, 3, 2, 5, 2, 3, 2, 3, 2, 3, 2,
+    2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 2,
+    2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 2,
+    2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 6, 2, 2, 3, 2, 2, 2, 3, 3, 2,
+    2, 3, 2, 3, 2, 3, 3, 3, 2, 6, 6, 6, 2, 3, 3, 3, 3, 3, 2, 2,
+    2, 3, 3, 3, 3, 3, 2, 3, 2, 2, 6, 2, 2, 3, 2, 2, 3, 3, 3, 2,
+    2, 3, 2, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 3, 2,
+    2, 3, 2, 3, 3, 3, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 3, 3, 3, 2,
+    2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 2, 3, 2, 2, 2, 2, 2, 3, 2,
+    2, 3, 3, 3, 2, 3, 3, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 2, 3, 2,
+    2, 3, 2, 3, 3, 3, 2, 3, 2, 2, 3, 3, 3, 2, 2, 2, 3, 2, 3, 2,
+    2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 2, 5, 2, 3, 3, 3, 2,
     2, 3, 2, 2, 2, 2, 2, 3, 2, 3, 3, 2, 3, 2, 2, 2, 2, 3, 2, 2,
-    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-    3, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 3,
-    4, 3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4
+    2, 4, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 4, 2,
+    2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
   ]
 
   // console.log(aMazeing.length)
@@ -40,13 +40,9 @@ function init() {
   // console.log('livesLeft >', livesLeft)
   let countLives = 3
   
-
-
-  const matrushkaStartingPosition = 389
-  let currentMatrushkaPosition = 389
+  let currentMatrushkaPosition = 369
   const matrushkaClass = 'matrushka'
 
-  const enemyStartingPosition = 150
   let currentEnemyPosition = 150
   // console.log(currentEnemyPosition)
   const enemyClass = 'enemy'
@@ -70,7 +66,7 @@ function init() {
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {               // It is going to repeat 200 times (because of 20 * 20)
       const cell = document.createElement('div')        // Creating a div. 
-      cell.innerText = i                                // Making sure we see a number inside of a div
+      // cell.innerText = i                                // Making sure we see a number inside of a div
       // console.log('cell >', cell)
       maze.appendChild(cell)                            // Appending a cell as a child to the main div with the class of 'grid'
       cells.push(cell)    
@@ -323,7 +319,7 @@ function init() {
 
   // ! Removing big Babushka, not zet properly styled
 
-  function removeBigBabushka(index) {
+  function removeBigBabushka() {
     if (cells[currentMatrushkaPosition].classList.contains('bigPoints')) {
       cells[currentMatrushkaPosition].classList.remove('bigPoints')
       // console.log('I am STILL here')
@@ -384,7 +380,7 @@ function init() {
   function endGame() {
     removeMatrushka(currentMatrushkaPosition)
     removeEnemy(currentEnemyPosition)
-    currentMatrushkaPosition = 389
+    currentMatrushkaPosition = 369
     currentEnemyPosition = 150
     addMatrushka(currentEnemyPosition)
     addEnemy(currentEnemyPosition)
