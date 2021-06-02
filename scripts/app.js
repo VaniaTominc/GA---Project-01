@@ -16,20 +16,20 @@ function init() {
     2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 2,
     2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 2,
     2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 3, 2, 2, 2, 3, 2, 3, 2, 3, 2,
-    2, 3, 2, 5, 2, 3, 2, 5, 2, 3, 3, 2, 5, 2, 3, 2, 3, 2, 3, 2,
+    2, 3, 2, 0, 2, 3, 2, 0, 2, 3, 3, 2, 0, 2, 3, 2, 3, 2, 3, 2,
     2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 2,
-    2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 2,
-    2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 6, 2, 2, 3, 2, 2, 2, 3, 3, 2,
-    2, 3, 2, 3, 2, 3, 3, 3, 2, 6, 6, 6, 2, 3, 3, 3, 3, 3, 2, 2,
-    2, 3, 3, 3, 3, 3, 2, 3, 2, 2, 6, 2, 2, 3, 2, 2, 3, 3, 3, 2,
+    2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 2,
+    2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 0, 2, 2, 3, 2, 2, 2, 3, 3, 2,
+    2, 3, 2, 3, 2, 3, 3, 3, 2, 6, 7, 8, 2, 3, 3, 3, 3, 3, 2, 2,
+    2, 3, 3, 3, 3, 3, 2, 3, 2, 2, 0, 2, 2, 3, 2, 2, 3, 3, 3, 2,
     2, 3, 2, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 3, 2,
     2, 3, 2, 3, 3, 3, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 3, 3, 3, 2,
     2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 2, 3, 2, 2, 2, 2, 2, 3, 2,
     2, 3, 3, 3, 2, 3, 3, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 2, 3, 2,
     2, 3, 2, 3, 3, 3, 2, 3, 2, 2, 3, 3, 3, 2, 2, 2, 3, 2, 3, 2,
-    2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 2, 5, 2, 3, 3, 3, 2,
+    2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 2, 0, 2, 3, 3, 3, 2,
     2, 3, 2, 2, 2, 2, 2, 3, 2, 3, 3, 2, 3, 2, 2, 2, 2, 3, 2, 2,
-    2, 4, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 4, 2,
+    2, 4, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 4, 2,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
   ]
 
@@ -75,17 +75,69 @@ function init() {
       addObstacle(i)
       addLittleBabushka(i)
       addBigBabushka(i)
+      // addPresidentEnimies(i)
     }
     
-    addEnemy(currentEnemyPosition)
+    addEnemyPresident()
+    // addEnemy(currentEnemyPosition)
     addMatrushka(currentMatrushkaPosition)
   }
 
   // ! ENEMY
 
-  function addEnemy(position) {
-    cells[position].classList.add(enemyClass)
+  class PresidentEnemy {
+    constructor (namePresident, startingPosition, speed) {
+      this.namePresident = namePresident
+      this.startingPosition = startingPosition
+      this.speed = speed
+    }
   }
+
+  const usPresident01 = new PresidentEnemy('nixon', 150, 200)
+  const usPresident02 = new PresidentEnemy('bushSr', 189, 200)
+  const usPresident03 = new PresidentEnemy('truman', 190, 200)
+  const usPresident04 = new PresidentEnemy('trump', 191, 200)
+
+  const enemyPresidents = [usPresident01, usPresident02, usPresident03, usPresident04]
+  // console.log(enemyPresidents)
+  // console.log(usPresiden01.namePresident)
+
+  function addEnemyPresident() {
+    enemyPresidents.forEach(item => {
+      cells[item.startingPosition].classList.add(item.namePresident)
+    })
+  }
+
+  function removeEnemyPresident() {
+    enemyPresidents.forEach(item => {
+      cells[item.startingPosition].classList.remove(item.namePresident)
+    })
+  }
+
+  // console.log(vania)
+
+  // function addPresidentEnimies (index) {
+  //   if (aMazeing[index] === 5) {
+  //     // cells[index].classList.add('nixon')
+  //     cells[index].classList.add(usPresident01.namePresident)
+  //   }
+  //   if (aMazeing[index] === 6) {
+  //     // cells[index].classList.add('bushSr')
+  //     cells[index].classList.add(usPresident02.namePresident)
+  //   }
+  //   if (aMazeing[index] === 7) {
+  //     // cells[index].classList.add('truman')
+  //     cells[index].classList.add(usPresident03.namePresident)
+  //   }
+  //   if (aMazeing[index] === 8) {
+  //     // cells[index].classList.add('trump')
+  //     cells[index].classList.add(usPresident04.namePresident)
+  //   }
+  // }
+
+  // function addEnemy(position) {
+  //   cells[position].classList.add(enemyClass)
+  // }
 
   function removeEnemy(position) {
     cells[position].classList.remove(enemyClass)
@@ -119,29 +171,31 @@ function init() {
     random = Math.floor(Math.random() * direction.length)
     const finallyStartMoving = direction[random]
 
-    removeEnemy(currentEnemyPosition)
+    enemyPresidents.forEach(item => {
+      removeEnemyPresident(item.startingPosition)
 
-    if (cells[currentEnemyPosition] === cells[currentMatrushkaPosition]) {
-      reduceLives()
-      // audioPlaying('trololo', audio)
-      // audioPlaying('hahaha', audio)
-      lostLife.play()
-      music.pause()
-      music.currentTime = 0.0
-      if (countLives !== 0) {
-        gameOverCheck()
-      } else {
-        endGame()
+      if (cells[item.startingPosition] === cells[currentMatrushkaPosition]) {
+        reduceLives()
+        // audioPlaying('trololo', audio)
+        // audioPlaying('hahaha', audio)
+        lostLife.play()
+        music.pause()
+        music.currentTime = 0.0
+        if (countLives !== 0) {
+          gameOverCheck()
+        } else {
+          endGame()
+        }
       }
-    }
-
-    if (cells[currentEnemyPosition + finallyStartMoving].classList.contains('obstacle')) {
-      currentEnemyPosition += 0
-      addEnemy(currentEnemyPosition)
-    } else {
-      currentEnemyPosition += finallyStartMoving
-      addEnemy(currentEnemyPosition)
-    }
+  
+      if (cells[item.startingPosition + finallyStartMoving].classList.contains('obstacle')) {
+        item.startingPosition += 0
+        addEnemyPresident(item.startingPosition)
+      } else {
+        item.startingPosition += finallyStartMoving
+        addEnemyPresident(item.startingPosition)
+      }
+    })
   }
 
   // ! MATRUSHKA
