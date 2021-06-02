@@ -13,6 +13,11 @@ body {
   /* background-image: linear-gradient(#e3d5c1 90%, #8f0000) */
 }
 
+/* .outer {
+  height: 100vh;
+  background-image: url();
+} */
+
 .insider {
   display: flex;
   align-items: center;
@@ -24,8 +29,13 @@ body {
   background-color: #e3d5c1;
 }
 
-header {
-  margin-top: 50px;
+.insider::after {
+  content: '';
+  background-image: url('../images/vintage-concrete.png');
+  height: 100%;
+  width: 100%;
+  opacity: 0.3;
+  /* position: fixed; */        /* Preventing button from clicling on  */
 }
 
 main {
@@ -35,13 +45,17 @@ main {
   align-items: center;
 }
 
+h1 {
+  font-size: 80px;
+}
+
 .game-wrapper {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: -130px;
+  margin-top: -205px;
 }
 
 .maze {
@@ -54,6 +68,44 @@ main {
   width: 600px;
   border: 10px solid #8f0000;
   border-radius: 15px;
+  margin-top: 50px;
+}
+
+.total-lifes {
+  display: flex;
+  justify-content: center;
+}
+
+.three-lifes {
+  width: 60px;
+  height: 60px;
+  border: 1px solid blue;
+  margin-right: 10px;
+  background-image: url('../images/Hero.png');
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: 50%;
+}
+
+.two-lifes {
+  width: 60px;
+  height: 60px;
+  border: 1px solid blue;
+  margin-right: 10px;
+  background-image: url('../images/Hero.png');
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: 50%;
+}
+
+.one-life {
+  width: 60px;
+  height: 60px;
+  border: 1px solid blue;
+  background-image: url('../images/Hero.png');
+  background-repeat: no-repeat;
+  background-size: 70%;
+  background-position: 50%;
 }
 
 .maze div {
@@ -68,7 +120,16 @@ main {
   width: 400px;
   text-align: center;
   border: 1px solid red;
-  margin-left: 50px;
+  margin-left: 75px;
+  height: 500px;
+  margin-bottom: 170px;
+  margin-top: -50px;
+}
+
+.lives {
+  width: 400px;
+  height: 100px;
+  border: 1px solid yellow;
 }
 
 .maze div.matrushka {
@@ -81,6 +142,22 @@ main {
 
 .maze div.enemy {
   background-color: black; 
+}
+
+.maze div.nixon {
+  background-color: black;
+}
+
+.maze div.bushSr {
+  background-color: yellow;
+}
+
+.maze div.truman {
+  background-color: blue;
+}
+
+.maze div.trump {
+  background-color: red;
 }
 
 .maze div.obstacle {
@@ -112,3 +189,106 @@ main {
   position: absolute;
 }
 
+.middle-row {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+/* .arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+} */
+
+.up-arrow {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  width: 75px;
+  height: 40px;
+  margin-left: 161px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.left-arrow {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  width: 75px;
+  height: 40px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.right-arrow {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  width: 75px;
+  height: 40px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.down-arrow {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  width: 75px;
+  height: 40px;
+  margin-left: 161px;
+  border-radius: 5px;
+}
+
+button {
+  width: 100px;
+  height: 60px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: 400px;
+  margin-top: 130px;
+}
+
+.countingPoints {
+  display: flex;
+  width: 200px;
+  border: 1px solid black;
+  margin-top: 20px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.outer {
+  cursor: url('../images/MatrushkaCursor.png'), auto;
+}
+
+#babushkaCursor {
+  cursor: url('../images/Hero.png'), auto;
+}

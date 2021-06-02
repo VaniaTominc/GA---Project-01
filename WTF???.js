@@ -3,8 +3,7 @@ function init() {
   const startButton = document.querySelector('button')
   const threeLives = document.querySelector('.three-lifes')
   const twoLives = document.querySelector('.two-lifes')
-  const oneLives = document.querySelector('.one-life')
-  const audio = document.querySelector('audio')
+  const oneLives = document.querySelector('.one-lifes')
 
   const width = 20
   const cellCount = width * width
@@ -16,20 +15,20 @@ function init() {
     2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 2,
     2, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 2,
     2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 3, 2, 2, 2, 3, 2, 3, 2, 3, 2,
-    2, 3, 2, 5, 2, 3, 2, 5, 2, 3, 3, 2, 5, 2, 3, 2, 3, 2, 3, 2,
+    2, 3, 2, 0, 2, 3, 2, 0, 2, 3, 3, 2, 0, 2, 3, 2, 3, 2, 3, 2,
     2, 3, 2, 2, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 2, 3, 2,
-    2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 2,
-    2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 6, 2, 2, 3, 2, 2, 2, 3, 3, 2,
-    2, 3, 2, 3, 2, 3, 3, 3, 2, 6, 6, 6, 2, 3, 3, 3, 3, 3, 2, 2,
-    2, 3, 3, 3, 3, 3, 2, 3, 2, 2, 6, 2, 2, 3, 2, 2, 3, 3, 3, 2,
+    2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 3, 2,
+    2, 2, 2, 3, 2, 2, 2, 3, 2, 2, 0, 2, 2, 3, 2, 2, 2, 3, 3, 2,
+    2, 3, 2, 3, 2, 3, 3, 3, 2, 6, 7, 8, 2, 3, 3, 3, 3, 3, 2, 2,
+    2, 3, 3, 3, 3, 3, 2, 3, 2, 2, 0, 2, 2, 3, 2, 2, 3, 3, 3, 2,
     2, 3, 2, 3, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 3, 2,
     2, 3, 2, 3, 3, 3, 2, 3, 2, 3, 2, 2, 3, 2, 3, 2, 3, 3, 3, 2,
     2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 2, 3, 2, 2, 2, 2, 2, 3, 2,
     2, 3, 3, 3, 2, 3, 3, 3, 2, 3, 2, 3, 3, 3, 3, 3, 3, 2, 3, 2,
     2, 3, 2, 3, 3, 3, 2, 3, 2, 2, 3, 3, 3, 2, 2, 2, 3, 2, 3, 2,
-    2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 2, 5, 2, 3, 3, 3, 2,
+    2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 3, 2, 0, 2, 3, 3, 3, 2,
     2, 3, 2, 2, 2, 2, 2, 3, 2, 3, 3, 2, 3, 2, 2, 2, 2, 3, 2, 2,
-    2, 4, 3, 3, 3, 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 4, 2,
+    2, 4, 3, 3, 3, 3, 3, 3, 3, 1, 3, 3, 3, 3, 3, 3, 3, 3, 4, 2,
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
   ]
 
@@ -39,7 +38,6 @@ function init() {
   const livesLeft = document.querySelector('.livesLeft')
   let countLives = 3
   
-  const startingMatrushkaPosition = 369
   let currentMatrushkaPosition = 369
   const matrushkaClass = 'matrushka'
 
@@ -56,16 +54,12 @@ function init() {
   function startGame() {
     startButton.disabled = true
     startButtonValue = true
-    music.play()
+    clearInterval(timer)
     timer = setInterval(() => {
       enemyMovement()
     }, 200)
     
   }
-
-  const music = new Audio('sounds/trololo.mp3')
-  const coins = new Audio('sounds/coin-drop-4.mp3')
-  const lostLife = new Audio('sounds/hahaha.mp3')
 
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {               
@@ -75,6 +69,7 @@ function init() {
       addObstacle(i)
       addLittleBabushka(i)
       addBigBabushka(i)
+      addPresidentEnimies(i)
     }
     
     addEnemy(currentEnemyPosition)
@@ -83,32 +78,64 @@ function init() {
 
   // ! ENEMY
 
+  class PresidentEnemy {
+    constructor (namePresident, startingPosition, speed) {
+      this.namePresident = namePresident
+      this.startingPosition = startingPosition
+      this.speed = speed
+    }
+  }
+
+  const usPresident01 = new PresidentEnemy('nixon', 150, 200)
+  const usPresident02 = new PresidentEnemy('bushSr', 189, 200)
+  const usPresident03 = new PresidentEnemy('truman', 190, 200)
+  const usPresident04 = new PresidentEnemy('trump', 191, 200)
+
+  // const enemyPresidents = [usPresident01, usPresident02, usPresident03, usPresident04]
+  // console.log(enemyPresidents)
+  // console.log(usPresiden01.namePresident)
+
+  function addPresidentEnimies (index) {
+    if (aMazeing[index] === 5) {
+      // cells[index].classList.add('nixon')
+      cells[index].classList.add(usPresident01.namePresident)
+    }
+    if (aMazeing[index] === 6) {
+      // cells[index].classList.add('bushSr')
+      cells[index].classList.add(usPresident02.namePresident)
+    }
+    if (aMazeing[index] === 7) {
+      // cells[index].classList.add('truman')
+      cells[index].classList.add(usPresident03.namePresident)
+    }
+    if (aMazeing[index] === 8) {
+      // cells[index].classList.add('trump')
+      cells[index].classList.add(usPresident04.namePresident)
+    }
+  }
+
+  // ? Original function addEnemy just for one enemy
   function addEnemy(position) {
     cells[position].classList.add(enemyClass)
   }
 
+  
   function removeEnemy(position) {
     cells[position].classList.remove(enemyClass)
   }
 
   // ! LIVES
 
-  threeLives.classList.add('three-lifes')
-  twoLives.classList.add('two-lifes')
-  oneLives.classList.add('one-life')
+  function addLives() {
+    threeLives.classList.add('three-lifes')
+    twoLives.classList.add('two-lifes')
+    oneLives.classList.add('one-life')
+  }
 
   // addLives()
 
   function reduceLives() {
     countLives--
-    if (countLives === 2) {
-      oneLives.classList.remove('one-life')
-    } else if (countLives === 1) {
-      twoLives.classList.remove('two-lifes')
-    }
-    // } else if (countLives === 0) {
-    //   threeLives.classList.ast('three-lifes')
-    // }
     livesLeft.innerText = parseFloat(countLives)
   }
 
@@ -123,11 +150,6 @@ function init() {
 
     if (cells[currentEnemyPosition] === cells[currentMatrushkaPosition]) {
       reduceLives()
-      // audioPlaying('trololo', audio)
-      // audioPlaying('hahaha', audio)
-      lostLife.play()
-      music.pause()
-      music.currentTime = 0.0
       if (countLives !== 0) {
         gameOverCheck()
       } else {
@@ -250,8 +272,6 @@ function init() {
   function gettingSmallBabushka() {
     if (cells[currentMatrushkaPosition].classList.contains('points')) {
       countBabushkaPoints += 10
-      // audioPlaying('coin-drop-4', audio)
-      coins.play()
       babushkaScore.innerText = parseFloat(countBabushkaPoints)
     }
   }
@@ -267,14 +287,15 @@ function init() {
   // ! Checking for game over 
   function gameOverCheck() {
     console.log('RESTARTING')
-    clearInterval(timer)
+    clearInterval(movement)
     startButton.disabled = false
     removeMatrushka(currentMatrushkaPosition)
     removeEnemy(currentEnemyPosition)
     currentMatrushkaPosition = 369
     currentEnemyPosition = 150
-    addMatrushka(startingMatrushkaPosition)
+    addMatrushka(currentMatrushkaPosition)
     addEnemy(startingEnemyPosition)
+    console.log('addEnemy 03', currentEnemyPosition)
     countBabushkaPoints = 0
     // babushkaScore.innerText = parseFloat(countBabushkaPoints)
     countLives
@@ -284,7 +305,7 @@ function init() {
   // ! End game
 
   function endGame() {
-    clearInterval(timer)
+    clearTimeout(movement)
     removeMatrushka(currentMatrushkaPosition)
     removeEnemy(currentEnemyPosition)
     currentMatrushkaPosition = 369
@@ -292,23 +313,10 @@ function init() {
     addMatrushka(currentMatrushkaPosition)
     addEnemy(currentEnemyPosition)
     startGame()
-    if (confirm(`GAME OVER. Your score was ${countBabushkaPoints}`)) {
-      window.location.reload()
-    }
+    window.location.reload()
   }
 
 
-  // ! Audio function
-
-  function audioPlaying(sound, audio) {
-    audio.src = `sounds/${sound}.mp3`
-    audio.play()
-  }
-
-  function gamePlaying(sound, audio) {
-    audio.src = `sounds/${sound}.mp3`
-    audio.play()
-  }
 
   // ! Event listener for keyboard keys.
   document.addEventListener('keyup', handleKeyUp)

@@ -1,10 +1,6 @@
 function init() {
   const maze = document.querySelector('.maze')
   const startButton = document.querySelector('button')
-  const threeLives = document.querySelector('.three-lifes')
-  const twoLives = document.querySelector('.two-lifes')
-  const oneLives = document.querySelector('.one-life')
-  const audio = document.querySelector('audio')
 
   const width = 20
   const cellCount = width * width
@@ -39,7 +35,6 @@ function init() {
   const livesLeft = document.querySelector('.livesLeft')
   let countLives = 3
   
-  const startingMatrushkaPosition = 369
   let currentMatrushkaPosition = 369
   const matrushkaClass = 'matrushka'
 
@@ -56,16 +51,12 @@ function init() {
   function startGame() {
     startButton.disabled = true
     startButtonValue = true
-    music.play()
+    clearInterval(timer)
     timer = setInterval(() => {
       enemyMovement()
     }, 200)
     
   }
-
-  const music = new Audio('sounds/trololo.mp3')
-  const coins = new Audio('sounds/coin-drop-4.mp3')
-  const lostLife = new Audio('sounds/hahaha.mp3')
 
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {               
@@ -93,22 +84,8 @@ function init() {
 
   // ! LIVES
 
-  threeLives.classList.add('three-lifes')
-  twoLives.classList.add('two-lifes')
-  oneLives.classList.add('one-life')
-
-  // addLives()
-
   function reduceLives() {
     countLives--
-    if (countLives === 2) {
-      oneLives.classList.remove('one-life')
-    } else if (countLives === 1) {
-      twoLives.classList.remove('two-lifes')
-    }
-    // } else if (countLives === 0) {
-    //   threeLives.classList.ast('three-lifes')
-    // }
     livesLeft.innerText = parseFloat(countLives)
   }
 
@@ -123,11 +100,6 @@ function init() {
 
     if (cells[currentEnemyPosition] === cells[currentMatrushkaPosition]) {
       reduceLives()
-      // audioPlaying('trololo', audio)
-      // audioPlaying('hahaha', audio)
-      lostLife.play()
-      music.pause()
-      music.currentTime = 0.0
       if (countLives !== 0) {
         gameOverCheck()
       } else {
@@ -250,8 +222,6 @@ function init() {
   function gettingSmallBabushka() {
     if (cells[currentMatrushkaPosition].classList.contains('points')) {
       countBabushkaPoints += 10
-      // audioPlaying('coin-drop-4', audio)
-      coins.play()
       babushkaScore.innerText = parseFloat(countBabushkaPoints)
     }
   }
@@ -267,14 +237,17 @@ function init() {
   // ! Checking for game over 
   function gameOverCheck() {
     console.log('RESTARTING')
-    clearInterval(timer)
+    clearInterval(movement)
     startButton.disabled = false
     removeMatrushka(currentMatrushkaPosition)
-    removeEnemy(currentEnemyPosition)
+    console.log('addEnemy 01', currentEnemyPosition)
+    // removeEnemy(currentEnemyPosition)
+    console.log('addEnemy 02', currentEnemyPosition)
     currentMatrushkaPosition = 369
     currentEnemyPosition = 150
-    addMatrushka(startingMatrushkaPosition)
+    addMatrushka(currentMatrushkaPosition)
     addEnemy(startingEnemyPosition)
+    console.log('addEnemy 03', currentEnemyPosition)
     countBabushkaPoints = 0
     // babushkaScore.innerText = parseFloat(countBabushkaPoints)
     countLives
@@ -284,31 +257,16 @@ function init() {
   // ! End game
 
   function endGame() {
-    clearInterval(timer)
-    removeMatrushka(currentMatrushkaPosition)
-    removeEnemy(currentEnemyPosition)
-    currentMatrushkaPosition = 369
-    currentEnemyPosition = 150
-    addMatrushka(currentMatrushkaPosition)
-    addEnemy(currentEnemyPosition)
-    startGame()
-    if (confirm(`GAME OVER. Your score was ${countBabushkaPoints}`)) {
-      window.location.reload()
-    }
+    // clearTimeout(movement)
+    // removeMatrushka(currentMatrushkaPosition)
+    // removeEnemy(currentEnemyPosition)
+    // addMatrushka(currentMatrushkaPosition)
+    // addEnemy(currentEnemyPosition)
+    // startGame()
+    window.location.reload()
   }
 
 
-  // ! Audio function
-
-  function audioPlaying(sound, audio) {
-    audio.src = `sounds/${sound}.mp3`
-    audio.play()
-  }
-
-  function gamePlaying(sound, audio) {
-    audio.src = `sounds/${sound}.mp3`
-    audio.play()
-  }
 
   // ! Event listener for keyboard keys.
   document.addEventListener('keyup', handleKeyUp)
