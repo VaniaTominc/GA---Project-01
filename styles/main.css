@@ -98,7 +98,6 @@ p {
 }
 
 .maze div.nixon {
-  background-color: black;
   background-image: url('../images/nixon-resize.png');
   background-size: 80%;
   background-position: 50%;
@@ -107,7 +106,6 @@ p {
 }
 
 .maze div.bushSr {
-  background-color: yellow;
   background-image: url('../images/bushSr-resize.png');
   background-size: 65%;
   background-position: 50%;
@@ -116,7 +114,6 @@ p {
 }
 
 .maze div.carter {
-  background-color: blue;
   background-image: url('../images/carter-resize.png');
   background-size: 80%;
   background-position: 50%;
@@ -125,7 +122,6 @@ p {
 }
 
 .maze div.trump {
-  background-color: red;
   background-image: url('../images/trump-resize.png');
   background-size: 80%;
   background-position: 50%;
