@@ -109,7 +109,7 @@ function init() {
     enemyPresidents.forEach(item => {
       cells[item.currentEnemyPosition].classList.remove(item.namePresident)
     })
-  
+  }
 
   // ? For future add-ons, aka enemy logic. For now just some idea that I still need to develope.
   // function findEnemyCoordinates() {
@@ -150,11 +150,11 @@ function init() {
       if (cells[item.currentEnemyPosition + finallyStartMoving].classList.contains('obstacle')) {
         item.currentEnemyPosition += 0
         addEnemyPresident()
-        findEnemyCoordinates()
+        // findEnemyCoordinates()
       } else {
         item.currentEnemyPosition += finallyStartMoving
         addEnemyPresident()
-        findEnemyCoordinates()
+        // findEnemyCoordinates()
       }
     })
   }
@@ -324,6 +324,7 @@ function init() {
   startButton.addEventListener('click', pressStartGame)
 
   // ! Calling a grid function.
+  
   createGrid()
 
 }

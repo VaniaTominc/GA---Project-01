@@ -28,7 +28,6 @@ let coordinatesEnemy = [yEnemy, yEnemy]
 
 
 // ! Trying to target
-
 // New Matrushka's position should become enemey's wish position. 
 // ? Target Matrushka position
 let targetMatrushka = {
