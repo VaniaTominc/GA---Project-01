@@ -24,7 +24,7 @@ let yEnemy = Math.floor(currentEnemyPosition / width)
 // ! Coordinate positions
 
 let coordinatesMatrushka = [xMatrushka, yMatrushka]
-let coordinatesEnemy = [xEnemy, yEnemy]
+let coordinatesEnemy = [yEnemy, yEnemy]
 
 
 // ! Trying to target
@@ -45,13 +45,3 @@ let enemyPosition = {
 // ? Subtract (= difference vector)
 let distanceX = targetMatrushka.x - enemyPosition.x
 let distanceY = targetMatrushka.y - enemyPosition.y
-
-// ? Normalize (= direction vector)
-// ? (a distance vector has a length of 1)
-let targetLength = Math.sqrt(distanceX * distanceX + distanceY * distanceY)
-
-// ? Move
-// ? delta is the elapsed time in seconds
-// ? SPEED is the speed in units per second (UPS)
-enemyPosition.x += distanceX * delta * SPEED
-enemyPosition.y += distanceY * delta * SPEED

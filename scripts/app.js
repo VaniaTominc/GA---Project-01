@@ -10,6 +10,25 @@ function init() {
   const cellCount = width * width
   const cells = []
 
+  const babushkaScore = document.querySelector('.counter')
+  let countBabushkaPoints = 0
+
+  let countLives = 3
+  let timer
+  
+  const startingMatrushkaPosition = 369
+  let currentMatrushkaPosition = 369
+  const matrushkaClass = 'matrushka'
+
+  // const startingEnemyPosition = 150
+  // const enemyClass = 'enemy'
+
+  const kalinka = new Audio('sounds/kalinka.mp3')
+  const coins = new Audio('sounds/coin-drop-4.mp3')
+  const lostLife = new Audio('sounds/trololohahaha.mp3')
+
+  let startButtonValue = false        // ! To prevent player to use moving buttons before starting a game.
+
   const aMazeing = [
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
     2, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 2,
@@ -33,40 +52,19 @@ function init() {
     2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
   ]
 
-  const babushkaScore = document.querySelector('.counter')
-  let countBabushkaPoints = 0
-
-  const livesLeft = document.querySelector('.livesLeft')
-  let countLives = 3
-  
-  const startingMatrushkaPosition = 369
-  let currentMatrushkaPosition = 369
-  const matrushkaClass = 'matrushka'
-
-  const startingEnemyPosition = 150
-  let currentEnemyPosition = 150
-  const enemyClass = 'enemy'
-
-  let startButtonValue = false
-
   // ! START GAME
-
-  let timer
-
-  function startGame() {
+  function pressStartGame() {
     startButton.disabled = true
     startButtonValue = true
-    music.play()
+    kalinka.play()
+    kalinka.volume = 0.2
     timer = setInterval(() => {
       enemyMovement()
     }, 200)
     
   }
 
-  const music = new Audio('sounds/trololo.mp3')
-  const coins = new Audio('sounds/coin-drop-4.mp3')
-  const lostLife = new Audio('sounds/hahaha.mp3')
-
+  // ! Creating our grid
   function createGrid() {
     for (let i = 0; i < cellCount; i++) {               
       const cell = document.createElement('div')                                       
@@ -75,131 +73,93 @@ function init() {
       addObstacle(i)
       addLittleBabushka(i)
       addBigBabushka(i)
-      // addPresidentEnimies(i)
     }
-    
     addEnemyPresident()
     // addEnemy(currentEnemyPosition)
     addMatrushka(currentMatrushkaPosition)
   }
 
-  // ! ENEMY
-
+  // ! Creating ENEMY constructor class with 2 arguments, one of them is then assigned to the 'currentEnemyPosition'
   class PresidentEnemy {
-    constructor (namePresident, startingPosition, speed) {
+    constructor (namePresident, startingPosition) {
       this.namePresident = namePresident
       this.startingPosition = startingPosition
-      this.speed = speed
+      this.currentEnemyPosition = startingPosition
     }
   }
 
-  const usPresident01 = new PresidentEnemy('nixon', 150, 200)
-  const usPresident02 = new PresidentEnemy('bushSr', 189, 200)
-  const usPresident03 = new PresidentEnemy('truman', 190, 200)
-  const usPresident04 = new PresidentEnemy('trump', 191, 200)
+  // ? Adding values for each enemy in a separate variable
+  const usPresident01 = new PresidentEnemy('nixon', 150)
+  const usPresident02 = new PresidentEnemy('bushSr', 189)
+  const usPresident03 = new PresidentEnemy('carter', 190)
+  const usPresident04 = new PresidentEnemy('trump', 191)
 
+  // ? Storing variables in an array.
   const enemyPresidents = [usPresident01, usPresident02, usPresident03, usPresident04]
-  // console.log(enemyPresidents)
-  // console.log(usPresiden01.namePresident)
 
+  // ! Adding our enemy presidents to the grid, using .foreach method.
   function addEnemyPresident() {
     enemyPresidents.forEach(item => {
-      cells[item.startingPosition].classList.add(item.namePresident)
+      cells[item.currentEnemyPosition].classList.add(item.namePresident)
     })
   }
 
+  // ! Removing our enemy presidents from our grid, using .foreach method.
   function removeEnemyPresident() {
     enemyPresidents.forEach(item => {
-      cells[item.startingPosition].classList.remove(item.namePresident)
+      cells[item.currentEnemyPosition].classList.remove(item.namePresident)
     })
-  }
+  
 
-  // console.log(vania)
-
-  // function addPresidentEnimies (index) {
-  //   if (aMazeing[index] === 5) {
-  //     // cells[index].classList.add('nixon')
-  //     cells[index].classList.add(usPresident01.namePresident)
-  //   }
-  //   if (aMazeing[index] === 6) {
-  //     // cells[index].classList.add('bushSr')
-  //     cells[index].classList.add(usPresident02.namePresident)
-  //   }
-  //   if (aMazeing[index] === 7) {
-  //     // cells[index].classList.add('truman')
-  //     cells[index].classList.add(usPresident03.namePresident)
-  //   }
-  //   if (aMazeing[index] === 8) {
-  //     // cells[index].classList.add('trump')
-  //     cells[index].classList.add(usPresident04.namePresident)
-  //   }
+  // ? For future add-ons, aka enemy logic. For now just some idea that I still need to develope.
+  // function findEnemyCoordinates() {
+  //   enemyPresidents.forEach(item => {
+  //     let xEnemy = cells[item.currentEnemyPosition % width] 
+  //     console.log('xEnemy >>', xEnemy)
+  //     let yEnemy = Math.floor(cells[item.currentEnemyPosition / width])
+  //     console.log('yEnemy >>', yEnemy)
+  //   })
   // }
 
-  // function addEnemy(position) {
-  //   cells[position].classList.add(enemyClass)
-  // }
-
-  function removeEnemy(position) {
-    cells[position].classList.remove(enemyClass)
-  }
-
-  // ! LIVES
-
-  threeLives.classList.add('three-lifes')
-  twoLives.classList.add('two-lifes')
-  oneLives.classList.add('one-life')
-
-  // addLives()
-
-  function reduceLives() {
-    countLives--
-    if (countLives === 2) {
-      oneLives.classList.remove('one-life')
-    } else if (countLives === 1) {
-      twoLives.classList.remove('two-lifes')
-    }
-    // } else if (countLives === 0) {
-    //   threeLives.classList.ast('three-lifes')
-    // }
-    livesLeft.innerText = parseFloat(countLives)
-  }
-
-  let random
-
+  // ! Enemy movement - using foreach method.
   function enemyMovement() {
-    const direction = [1, -1, -width, width]      // right, left, up, down
-    random = Math.floor(Math.random() * direction.length)
-    const finallyStartMoving = direction[random]
-
     enemyPresidents.forEach(item => {
-      removeEnemyPresident(item.startingPosition)
 
-      if (cells[item.startingPosition] === cells[currentMatrushkaPosition]) {
+      removeEnemyPresident(item.currentEnemyPosition)
+      if (cells[item.currentEnemyPosition] === cells[currentMatrushkaPosition]) {
         reduceLives()
-        // audioPlaying('trololo', audio)
-        // audioPlaying('hahaha', audio)
         lostLife.play()
-        music.pause()
-        music.currentTime = 0.0
+        kalinka.pause()
+
         if (countLives !== 0) {
-          gameOverCheck()
+          restartGame()
         } else {
           endGame()
         }
       }
-  
-      if (cells[item.startingPosition + finallyStartMoving].classList.contains('obstacle')) {
-        item.startingPosition += 0
-        addEnemyPresident(item.startingPosition)
+
+      // Possible directions of movement 
+      const direction = [1, -1, -width, width]
+
+      // We want our enemy to move randomly
+      const random = Math.floor(Math.random() * direction.length)
+      const finallyStartMoving = direction[random]  
+      // console.log('last position >>', item.currentEnemyPosition)
+      
+      // Making sure our enemy doesn't go the cell that contains an obstacle.
+      if (cells[item.currentEnemyPosition + finallyStartMoving].classList.contains('obstacle')) {
+        item.currentEnemyPosition += 0
+        addEnemyPresident()
+        findEnemyCoordinates()
       } else {
-        item.startingPosition += finallyStartMoving
-        addEnemyPresident(item.startingPosition)
+        item.currentEnemyPosition += finallyStartMoving
+        addEnemyPresident()
+        findEnemyCoordinates()
       }
     })
   }
 
-  // ! MATRUSHKA
-
+  // ! Creating our Hero
   function addMatrushka(position) {
     cells[position].classList.add(matrushkaClass)
   }
@@ -209,12 +169,10 @@ function init() {
   }
 
 // ! HANDLING PLAYER KEYS
-
   function handleKeyUp(event) {
-    if (startButtonValue === true) {
+    if (startButtonValue === true) {        
       const key = event.keyCode
       removeMatrushka(currentMatrushkaPosition)
-
       if (key === 39) {                 // ! We are going RIGHT
         if (cells[currentMatrushkaPosition + 1].classList.contains('obstacle')) {
           currentMatrushkaPosition += 0
@@ -261,8 +219,23 @@ function init() {
     }
   }
 
-  // ! ADDING AND REMOVING ELEMENTS TO GRID
+  // ! LIVES
 
+  threeLives.classList.add('three-lifes')
+  twoLives.classList.add('two-lifes')
+  oneLives.classList.add('one-life')
+
+  function reduceLives() {
+    countLives--
+    if (countLives === 2) {
+      oneLives.classList.remove('one-life')
+    } else if (countLives === 1) {
+      twoLives.classList.remove('two-lifes')
+    }
+  }
+
+
+  // ! ADDING AND REMOVING ELEMENTS TO GRID
   // ! Adding obstacles
   function addObstacle(index) {
     if (aMazeing[index] === 2) {
@@ -270,29 +243,28 @@ function init() {
     }
   } 
 
-  // ! Adding little Babushka, for now just some random color
+  // ! Adding little Babushka
   function addLittleBabushka(index) {
     if (aMazeing[index] === 3) {
       cells[index].classList.add('points')
     }
   }
 
-  // ! Removing little Babushka, not yet properly styled
+  // ! Removing little Babushka
   function removeLittleBabushka() {
     if (cells[currentMatrushkaPosition].classList.contains('points')) {
       cells[currentMatrushkaPosition].classList.remove('points')
     }
   }
 
-
-  // ! Adding big Babushka, not yet properly styled
+  // ! Adding big Babushka
   function addBigBabushka(index) {
     if (aMazeing[index] === 4) {
       cells[index].classList.add('bigPoints')
     }
   }
 
-  // ! Removing big Babushka, not zet properly styled
+  // ! Removing big Babushka
   function removeBigBabushka() {
     if (cells[currentMatrushkaPosition].classList.contains('bigPoints')) {
       cells[currentMatrushkaPosition].classList.remove('bigPoints')
@@ -300,11 +272,9 @@ function init() {
   }
 
   // ! Getting small points function to prevent the repetition of code
-
   function gettingSmallBabushka() {
     if (cells[currentMatrushkaPosition].classList.contains('points')) {
       countBabushkaPoints += 10
-      // audioPlaying('coin-drop-4', audio)
       coins.play()
       babushkaScore.innerText = parseFloat(countBabushkaPoints)
     }
@@ -312,62 +282,48 @@ function init() {
 
   function gettingBigBabushka() {
     if (cells[currentMatrushkaPosition].classList.contains('bigPoints')) {
-      countBabushkaPoints += 100
+      countBabushkaPoints += 10
+      coins.play()
       babushkaScore.innerText = parseFloat(countBabushkaPoints)
     }
   }
 
 
   // ! Checking for game over 
-  function gameOverCheck() {
-    console.log('RESTARTING')
+  function restartGame() {
+    // console.log('RESTARTING')
     clearInterval(timer)
+    startButtonValue = false
     startButton.disabled = false
+    // Deleting the last enemy position
+    enemyPresidents.forEach(item => {
+      cells[item.currentEnemyPosition].classList.remove('nixon', 'trump', 'bushSr', 'carter')
+    })
     removeMatrushka(currentMatrushkaPosition)
-    removeEnemy(currentEnemyPosition)
     currentMatrushkaPosition = 369
-    currentEnemyPosition = 150
     addMatrushka(startingMatrushkaPosition)
-    addEnemy(startingEnemyPosition)
+    // Somehow I have to reset enemy position to the original one!
+    enemyPresidents.forEach(item => {
+      item.currentEnemyPosition = item.startingPosition
+      cells[item.currentEnemyPosition].classList.add(item.namePresident)
+    })
     countBabushkaPoints = 0
-    // babushkaScore.innerText = parseFloat(countBabushkaPoints)
+    babushkaScore.innerText = parseFloat(countBabushkaPoints)
     countLives
-    // enemyMovement(
   }
 
   // ! End game
-
   function endGame() {
-    clearInterval(timer)
-    removeMatrushka(currentMatrushkaPosition)
-    removeEnemy(currentEnemyPosition)
-    currentMatrushkaPosition = 369
-    currentEnemyPosition = 150
-    addMatrushka(currentMatrushkaPosition)
-    addEnemy(currentEnemyPosition)
-    startGame()
     if (confirm(`GAME OVER. Your score was ${countBabushkaPoints}`)) {
       window.location.reload()
     }
   }
 
-
-  // ! Audio function
-
-  function audioPlaying(sound, audio) {
-    audio.src = `sounds/${sound}.mp3`
-    audio.play()
-  }
-
-  function gamePlaying(sound, audio) {
-    audio.src = `sounds/${sound}.mp3`
-    audio.play()
-  }
-
-  // ! Event listener for keyboard keys.
+  // ! Event listener for keys.
   document.addEventListener('keyup', handleKeyUp)
-  startButton.addEventListener('click', startGame)
+  startButton.addEventListener('click', pressStartGame)
 
+  // ! Calling a grid function.
   createGrid()
 
 }

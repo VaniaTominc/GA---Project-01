@@ -8,34 +8,34 @@ body {
   /* display: flex;
   justify-content: center;
   align-content: stretch;
-  align-items: center; */
-  background-color: black;
-  /* background-image: linear-gradient(#e3d5c1 90%, #8f0000) */
-}
+  align-items: center;  */
+  background-color: #e3d5c1;
+  background-image: -webkit-linear-gradient(-28deg, #8c8670 0%, #8c8670 45%, #292423 30%, #292423 30%);
+  background-image: linear-gradient( -28deg, #8c8670 0%, #8c8670 45%, #292423 30%, #292423 30%);
+  cursor: url('../images/MatrushkaCursor.png'), auto;
+} 
 
 /* .outer {
   height: 100vh;
-  background-image: url();
+  cursor: url('../images/MatrushkaCursor.png'), auto;
+  display: flex;
 } */
 
 .insider {
-  display: flex;
+  /* display: flex; */
+  /* display: flex;
   align-items: center;
-  flex-direction: column;
-  width: 94%;
-  margin-left: 3%;
-  margin-right: 3%;
-  border: 1px solid black;
-  background-color: #e3d5c1;
+  flex-direction: column; */
+  /* width: 120%; */
 }
 
-.insider::after {
+main::after {
   content: '';
   background-image: url('../images/vintage-concrete.png');
-  height: 100%;
+  height: 200%;
   width: 100%;
   opacity: 0.3;
-  /* position: fixed; */        /* Preventing button from clicling on  */
+  position: fixed;          
 }
 
 main {
@@ -45,8 +45,18 @@ main {
   align-items: center;
 }
 
-h1 {
-  font-size: 80px;
+.header {
+  display: flex;
+  align-items: baseline;
+}
+
+
+p {
+  font-family: 'Play', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: yellow;
 }
 
 .game-wrapper {
@@ -55,7 +65,8 @@ h1 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: -205px;
+  margin-top: -20px;
+  /* margin-top: -205px; */
 }
 
 .maze {
@@ -64,48 +75,9 @@ h1 {
   flex-wrap: wrap;
   height: 100%;
   justify-content: center;
-  height: 600px;
-  width: 600px;
-  border: 10px solid #8f0000;
-  border-radius: 15px;
-  margin-top: 50px;
-}
-
-.total-lifes {
-  display: flex;
-  justify-content: center;
-}
-
-.three-lifes {
-  width: 60px;
-  height: 60px;
-  border: 1px solid blue;
-  margin-right: 10px;
-  background-image: url('../images/Hero.png');
-  background-repeat: no-repeat;
-  background-size: 70%;
-  background-position: 50%;
-}
-
-.two-lifes {
-  width: 60px;
-  height: 60px;
-  border: 1px solid blue;
-  margin-right: 10px;
-  background-image: url('../images/Hero.png');
-  background-repeat: no-repeat;
-  background-size: 70%;
-  background-position: 50%;
-}
-
-.one-life {
-  width: 60px;
-  height: 60px;
-  border: 1px solid blue;
-  background-image: url('../images/Hero.png');
-  background-repeat: no-repeat;
-  background-size: 70%;
-  background-position: 50%;
+  height: 700px;
+  width: 700px;
+  margin-top: 100px;
 }
 
 .maze div {
@@ -114,76 +86,179 @@ h1 {
   width: 5%;
   color: rgb(92, 21, 21);
   text-align: center;
+  border-radius: 5px;
 }
 
-.right {
+.maze div.matrushka {
+  background-image: url('../images/Hero.png');
+  background-size: 70%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  /* z-index: 1; */
+}
+
+.maze div.nixon {
+  background-color: black;
+  background-image: url('../images/nixon-resize.png');
+  background-size: 80%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  /* z-index: 1; */
+}
+
+.maze div.bushSr {
+  background-color: yellow;
+  background-image: url('../images/bushSr-resize.png');
+  background-size: 65%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  /* z-index: 1; */
+}
+
+.maze div.carter {
+  background-color: blue;
+  background-image: url('../images/carter-resize.png');
+  background-size: 80%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  /* z-index: 1; */
+}
+
+.maze div.trump {
+  background-color: red;
+  background-image: url('../images/trump-resize.png');
+  background-size: 80%;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.maze div.obstacle {
+  background-color: #8f0000;
+  border: 1px solid yellow;
+  opacity: 0.8;
+}
+
+.maze div.points {                                          
+  /* background-image: radial-gradient(#8f0000 20%, transparent 20%); */
+  position: relative;
+}
+
+.maze div.points::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  content: '';
+  background-image: radial-gradient(#8f0000 20%, transparent 20%);
+  z-index: -1;
+}
+
+.maze div.bigPoints {                                     
+  background-image: url('../images/rsz_clipartkey_1773009.png');
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: 50%;
+  z-index: 1;
+}
+
+/* Sorting the right side of the screen  */
+
+.right-side {
   width: 400px;
   text-align: center;
-  border: 1px solid red;
-  margin-left: 75px;
-  height: 500px;
+  margin-left: 100px;
+  height: 350px;
   margin-bottom: 170px;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-size: 70px;
+  font-family: 'Play', sans-serif;
+  color: #8f0000;
   margin-top: -50px;
+  z-index: 1;
+}
+
+h2 {
+  font-family: 'Play', sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  transform: rotate(-30deg);
+  -webkit-transform: rotate(-30deg);
+  letter-spacing: 2px;                                                         
+  color: yellow;
+  opacity: 0.8;
+  margin-top: -50px;
+  /* margin-right: -300px; */
+  /* margin-left: -250px; */
+}
+
+.right-side-inside {
+  margin-top: -70px;
 }
 
 .lives {
   width: 400px;
   height: 100px;
+  margin-top: 100px;
+
+}
+.total-lifes {
+  display: flex;
+  justify-content: center;
+}
+
+.three-lives-container {
+  width: 60px;
+  height: 60px;
   border: 1px solid yellow;
+  background-color: #8f0000;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
-.maze div.matrushka {
-  /* background-color: purple; */
+.three-lifes {
   background-image: url('../images/Hero.png');
-  background-size: 80%;
   background-repeat: no-repeat;
-  cursor: pointer;
-}
-
-.maze div.enemy {
-  background-color: black; 
-}
-
-.maze div.nixon {
-  background-color: black;
-}
-
-.maze div.bushSr {
-  background-color: yellow;
-}
-
-.maze div.truman {
-  background-color: blue;
-}
-
-.maze div.trump {
-  background-color: red;
-}
-
-.maze div.obstacle {
-  background-color: #8c8670;
-  background-image: linear-gradient( black);
-}
-
-.maze div.points {                                          /* Little Babushka */
-  /* background-image: url('../images/rsz_clipartkey_1773009.png');
-  background-repeat: no-repeat;
-  background-size: 25%;
-  background-position: 50%; */
-  background-image: radial-gradient(#8f0000 20%, transparent 20%);
-  
-}
-
-.maze div.bigPoints {                                       /* Small Babushka */
-  background-image: url('../images/rsz_clipartkey_1773009.png');
-  background-repeat: no-repeat;
-  background-size: 50%;
+  background-size: 60%;
   background-position: 50%;
 }
 
-/* div#backgroundBabushka {
-  background-image: url('ClipartKey_1041184.png');
-} */
+.two-lives-container {
+  width: 60px;
+  height: 60px;
+  border: 1px solid yellow;
+  background-color: #8f0000;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.two-lifes {
+  background-image: url('../images/Hero.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: 50%;
+}
+
+.one-lives-container {
+  width: 60px;
+  height: 60px;
+  border: 1px solid yellow;
+  background-color: #8f0000;
+  border-radius: 50%;
+}
+
+.one-life {
+  background-image: url('../images/Hero.png');
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: 50%;
+}
+
 
 .audio-image {
   position: absolute;
@@ -195,20 +270,18 @@ h1 {
   align-items: baseline;
 }
 
-/* .arrow {
-  border: solid black;
+.arrow {
+  border: solid #8f0000;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 3px;
-} */
+}
 
 .up-arrow {
-  transform: rotate(-135deg);
-  -webkit-transform: rotate(-135deg);
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid yellow;
   width: 75px;
   height: 40px;
   margin-left: 161px;
@@ -217,24 +290,30 @@ h1 {
   border-radius: 5px;
 }
 
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
 .left-arrow {
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
   width: 75px;
   height: 40px;
-  border: 1px solid black;
+  border: 1px solid yellow;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
 }
 
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
 .right-arrow {
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
   width: 75px;
   height: 40px;
-  border: 1px solid black;
+  border: 1px solid yellow;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -242,53 +321,85 @@ h1 {
   margin-left: 10px;
 }
 
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
 .down-arrow {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+  border: 1px solid yellow;
   width: 75px;
   height: 40px;
   margin-left: 161px;
   border-radius: 5px;
 }
 
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
 button {
+  font-size: 20px;
+  font-family: 'Play', sans-serif;
   width: 100px;
   height: 60px;
-  border: 1px solid black;
+  border: 1px solid #8f0000;
+  background-color: #8f0000;
+  color: yellow;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
   margin-left: 10px;
   margin-bottom: 10px;
+  z-index: 1;
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 .control {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  height: 400px;
-  margin-top: 130px;
+  height: 300px;
+  margin-top: 100px;
 }
 
 .countingPoints {
   display: flex;
-  width: 200px;
-  border: 1px solid black;
+  width: 100px;
+  border: 1px solid yellow;
+  border-radius: 10px;
   margin-top: 20px;
   height: 50px;
   justify-content: center;
   align-items: center;
+  background-color: #fbff003b;
 }
 
-.outer {
-  cursor: url('../images/MatrushkaCursor.png'), auto;
+.counter {
+  font-size: 25px;
+  font-weight: bold;
+  width: 50px;
+  height: 40px;
+  margin-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #8f0000;
 }
 
-#babushkaCursor {
-  cursor: url('../images/Hero.png'), auto;
+.mini-babushka {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  margin-top: 5px;
+  background-image: url('../images/MatrushkaCursor.png');
+  background-repeat: no-repeat;
 }
+
+

@@ -6,51 +6,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/main.css">
   <script src="scripts/app.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
   <title>Document</title>
 </head>
 <body>
-  <!-- <header>
-    <h1>ЪДЬЏSЊҚД</h1>
-  </header> -->
-  <div class='outer'>
-    <div class='insider'>
-      <header>
-        <h1>ЪДЬЏSЊҚД</h1>
-      </header>
-      <main>
-        <section class='one'>
-          <div class="game-wrapper">
-            <div class="maze"></div>
-            <div class="countingPoints"><span class='counter'></span>&nbspPoints</div>
+  <div class='insider'>
+    <!-- <header>
+      <h1>ЪДЬЏSЊҚД</h1>
+      <h2>land</h2>
+    </header> -->
+    <main> 
+      <section class='one'>
+        <div class="game-wrapper">
+          <div class="maze"></div>
+          <div class="countingPoints">
+            <div class='counter'>0</div>
+            <div class='mini-babushka'></div>
           </div>
-        </section>
-        <div class='right'>
+        </div>
+      </section>
+      <div class='right-side'>
+        <div class='header'>
+          <h1>ЪДЬЏSЊҚД</h1>
+          <h2>land</h2>
+        </div>
+        <div class='right-side-inside'>
           <section class='lives'>
             <div class='lives'>
-              You have <span class='livesLeft'></span> left
+              <p>Џоц нavё lёfт</p>
               <div class='total-lifes'>
-                <div class='three-lifes'></div>
-                <div class='two-lifes'></div>
-                <div class='one-life'></div>
+                <div class='three-lives-container three-lifes'></div>
+                <div class='two-lives-container two-lifes'></div>
+                <div class='one-lives-container one-life'></div>
               </div>
             </div>
             <div class='timer'></div>
           </section>
           <section class='control'>
-            <div class='up-arrow arrow'>Up</div>
+            <div class='up-arrow'><i class='up arrow'></i></div>
             <div class='middle-row'>
-              <div class='left-arrow arrow'>Left</div>
-              <button id='babushkaCursor'>Start</button>
-              <div class='right-arrow arrow'>Right</div>
+              <div class='left-arrow'><i class='left arrow'></i></div>
+              <button id='babushkaCursor'>₴TAЯT</button>
+              <div class='right-arrow'><i class='right arrow'></i></div>
             </div>
-            <div class='down-arrow arrow'>Down</div>
+            <div class='down-arrow'><i class='down arrow'></i></div>
           </section>
           <section class="audio-image">
             <audio></audio>
           </section>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   </div>
 </body>
 </html>
