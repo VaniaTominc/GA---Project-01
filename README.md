@@ -8,10 +8,6 @@ Pac-Man is a classic arcade game from the 80s. The player aims to eat all the fo
 
 A 8 days solo project.
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/83227280/129629158-05deea28-da39-4634-84e5-25abe55a8e88.png">
-</p>
-
 + ### Demo version
 
 <p align="center">
@@ -80,6 +76,10 @@ https://vaniatominc.github.io/GA-Project-01/
 + ### Planning (day 1)
 
 First, I started with pseudo-code, and wrote down steps I wanted to take to achieve as many functionalities as possible for my game. The instructors agreed with my plan and gave me the green light to start with actual coding.
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/83227280/129629158-05deea28-da39-4634-84e5-25abe55a8e88.png">
+</p>
 
 **SCAN FRAMEWORKS I DRAW FOR THE PROJECT.**
 
