@@ -48,7 +48,7 @@ https://vaniatominc.github.io/GA-Project-01/
 + **Design logic for winning** & visually display which player won.
 + **Include separate HTML / CSS / JavaScript files.**
 + **Stick with KISS** (Keep It Simple Stupid) **and DRY** (Don't Repeat Yourself) **principles**.
-+ **Use Javascrip for DOM manipulation.**
++ **Use JavaScript for DOM manipulation.**
 + **Deploy your game online**, where the rest of the world can access it (we will do this together at the end of the project).
 + **Use semantic markup for HTML and CSS** (adhere to best practices).
 
@@ -234,7 +234,7 @@ Throughout the week, in addition to building JavaScript functions, I also worked
 
 <br />
 
-## Bugs, blockers, wins
+## Bugs, challenges, wins
 
 + ### Bugs
 
