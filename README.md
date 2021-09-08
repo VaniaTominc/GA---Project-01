@@ -2,11 +2,11 @@
 
 ## Overview
 
-Pac-Man is a classic arcade game from the 80s. The player aims to eat all the food in a maze whilst being hunted by ghosts.
+Pac-Man is a classic arcade game from the 80s. The player aims to eat all the food in a maze whilst being hunted by ghosts. I re-created this clasic game as a General Assembly Software Engineering Immersive Student.
 
 + ### Timeframe
 
-A 8 days solo project.
+An 8 days solo project.
 
 + ### Demo version
 
@@ -35,8 +35,8 @@ https://vaniatominc.github.io/GA-Project-01/
     + The game.
   - Project walkthrough.
 + Bugs, challenges, wins
-+ Extra features and key learnings:
-  - Extra features,
++ Future features and key learnings:
+  - Future features,
   - Key learnings.
 
 <br />
@@ -230,7 +230,7 @@ The player starts the game with three lives. If the player loses a life, the gam
  
 + ### Styling (day 1 – day 7)
 
-Throughout the week, in addition to building JavaScript functions, I also worked on building CSS. From the beginning, I knew what my page was supposed to look like, but I didn’t know what colour scheme to use. Thus, it changed several times during the week. I wanted to create a “Soviet” themed game, and one of the ways to achieve it was to use colour scheme, typical for the Cold War period. I also chose sound effects that are more Russian-oriented. All in all, I think I managed to create a unique online game.
+Throughout the week, in addition to building JavaScript functions, I also worked on building CSS. From the beginning, I knew what my page was supposed to look like, but I didn’t know what colour scheme to use. Thus, it changed several times during the week. I wanted to create a “Soviet” themed game, and one of the ways to achieve it was to use a colour scheme, typical for the Cold War period. I also chose sound effects that are more Russian-oriented. All in all, I think I managed to create a unique online game.
 
 <br />
 
@@ -240,7 +240,7 @@ Throughout the week, in addition to building JavaScript functions, I also worked
 
   - There were some unexplainable cases where Soldiers or Enemies disappeared from the grid, but I managed to sort the majority of the bugs during the coding week.
   - Not a bug, per se, but Mr. Trump has a red point on his face. I think it might be due to the opacity settings in the CSS file (equals to 1).
-  - When the game ends, pop-up windows appear. If a player clicks on the “no” button, the website does not refresh and restart but reverts to the previous step. And the player has one more life. It is a bug for cheating.
+  - When the game ends, pop-up windows appear. If a player clicks on the “no” button, the website does not refresh or restart but reverts to the previous step and the player has one more life. It is a bug for cheating.
 
 + ### Challenges
 
@@ -248,7 +248,7 @@ Throughout the week, in addition to building JavaScript functions, I also worked
 
 + ### Wins
 
-  - Working with the classes and understanding them how they behave in certain situations.
+  - Working with the class and understanding how they behave in certain situations. 
   - CSS styling and audio files. I managed to give my personal and unique touch to the classical game of Pac-Man.
 
 <br />
