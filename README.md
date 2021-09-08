@@ -6,7 +6,7 @@ Pac-Man is a classic arcade game from the 80s. The player aims to eat all the fo
 
 + ### Timeframe
 
-An 8 days solo project.
+An 8 day solo project.
 
 + ### Demo version
 
